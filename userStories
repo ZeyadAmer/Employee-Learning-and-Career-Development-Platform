@@ -1,0 +1,73 @@
+Login Page:
+    User Story 1.1:User Login
+        Description: I should be able to login to the
+        home page dedicated for my user type.
+
+        Prerequisite state:must have an account
+
+        Action:user provides credentials and press
+        login button
+
+        System Reaction:The system checks if credentials
+        are right therefore authenticates otherwise
+        send error message.
+
+Sign-Up Page:
+    User Story 2.1:Create new user
+        Description:I should be able to create new user
+        define his type and add to the database.
+
+        Prerequisite state:must be an admin user.
+
+        Action:admin provides credentials and job role
+        and press create button
+
+        System Reaction:The system checks if credentials
+        are there if they are found return error user
+        already exists, otherwise create the user and
+        add it to the database.
+
+Home Page:
+    For all stories:
+    Prerequisite state:must be logged in.
+
+    User Story 3.1:Journey Map
+        Description:Displays all learners of the quarter,
+        shows the logged in user icon slightly bigger
+        than others.
+
+        Prerequisite state:
+
+        Action: The user navigates to the
+        "Journey Map" section of the home page.
+
+        System Reaction:The system retrieves the user’s
+        learning progress from database and displays a
+        graphical representation of their journey.
+
+    User Story 3.2:Scoreboard
+        Description:Displays the score of all learners of
+        the quarter, shows the logged in user icon
+        highlighted.
+
+        Prerequisite state:
+
+        Action: The user press scoreboard button.
+
+        System Reaction:The system should retrieve
+        all learners score and displays it in a table
+        descending order.
+
+    User Story 3.3:Learning Library
+        Description: I should be able to view available
+        learning materials,Wikis, and blogs in the library.
+
+        Prerequisite state:
+
+        Action: The user press scoreboard button.
+
+        System Reaction:The system should retrieve
+        all learners score and displays it in a table
+        descending order.
+
+

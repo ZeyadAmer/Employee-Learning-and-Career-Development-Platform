@@ -13,14 +13,14 @@ public class Department {
             strategy = GenerationType.IDENTITY
     )
     private int id;
+    @Column(unique = true, nullable = false)
     private String name;
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Title> titles;
 
     public Department() {}
-    public Department(String name, List<Title> titles) {
+    public Department(String name) {
         this.name = name;
-        this.titles = titles;
     }
     public int getId() {
         return id;

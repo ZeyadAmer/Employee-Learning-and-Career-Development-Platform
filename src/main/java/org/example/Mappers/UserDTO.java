@@ -7,17 +7,19 @@ import org.example.Entities.User;
 public class UserDTO {
     private String firstName;
     private String lastName;
-    private Title title;
-    private Department department;
-    private User manager;
+    private String title;
+    private String department;
+    private String managerEmail;
+    private String email;
 
     public UserDTO() {}
-    public UserDTO(String firstName, String lastName, Title title, Department department, User manager) {
+    public UserDTO(String firstName, String lastName, String title, String department, String managerEmail, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
         this.department = department;
-        this.manager = manager;
+        this.managerEmail = managerEmail;
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -36,27 +38,33 @@ public class UserDTO {
         this.lastName = lastName;
     }
 
-    public Title getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Title title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public Department getDepartment() {
+    public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
-    public User getManager() {
-        return manager;
+    public String getManager() {
+        return managerEmail;
     }
 
-    public void setManager(User manager) {
-        this.manager = manager;
+    public void setManager(String managerEmail) {
+        this.managerEmail = managerEmail;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

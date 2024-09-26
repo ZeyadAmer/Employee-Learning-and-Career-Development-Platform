@@ -16,6 +16,7 @@ public class Title {
     @ManyToOne
     @JoinColumn(name = "dept_id", nullable = false)
     private Department department;
+    @Column(unique = true, nullable = false)
     private String name;
     private boolean isManager;
     public Title() {}

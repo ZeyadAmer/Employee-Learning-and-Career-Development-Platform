@@ -1,19 +1,19 @@
 package org.example.Entities;
 
 import javax.persistence.*;
-import java.util.UUID;
 @Entity
 @Table(
-        name = "user"
+        name = "\"user\""
 )
 public class User {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private UUID id;
+    private int id;
     private String firstName;
     private String lastName;
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,10 +35,10 @@ public class User {
         this.department = department;
         this.title = title;
     }
-    public UUID getId() {
+    public int getId() {
         return id;
     }
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getFirstName() {

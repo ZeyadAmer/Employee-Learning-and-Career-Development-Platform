@@ -1,6 +1,5 @@
 package org.example.Entities;
 import javax.persistence.*;
-import java.util.UUID;
 
 
 @Entity
@@ -12,10 +11,10 @@ public class Title {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private UUID id;
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "deptId", nullable = false)
+    @JoinColumn(name = "dept_id", nullable = false)
     private Department department;
     private String name;
     private boolean isManager;
@@ -25,10 +24,10 @@ public class Title {
         this.name = name;
         this.isManager = isManager;
     }
-    public UUID getId() {
+    public int getId() {
         return id;
     }
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
     public Department getDepartment() {

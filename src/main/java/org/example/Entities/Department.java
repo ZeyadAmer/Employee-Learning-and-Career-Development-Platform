@@ -2,7 +2,6 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(
@@ -13,7 +12,7 @@ public class Department {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private UUID id;
+    private int id;
     private String name;
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Title> titles;
@@ -23,10 +22,10 @@ public class Department {
         this.name = name;
         this.titles = titles;
     }
-    public UUID getId() {
+    public int getId() {
         return id;
     }
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getName() {

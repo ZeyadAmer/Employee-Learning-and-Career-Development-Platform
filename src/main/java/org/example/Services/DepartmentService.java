@@ -1,5 +1,4 @@
 package org.example.Services;
-
 import org.example.Entities.Department;
 import org.example.Entities.Title;
 import org.example.Exceptions.ExistsException;
@@ -8,8 +7,6 @@ import org.example.Mappers.DepartmentMapper;
 import org.example.Repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +26,8 @@ public class DepartmentService {
         }
         departmentRepository.save(departmentMapper.departmentDTOToDepartment(departmentDTO));
     }
-    public void deleteDepartment(DepartmentDTO departmentDTO) {
-        Optional<Department> department = departmentRepository.findByName(departmentDTO.getName());
+    public void deleteDepartment(String departmentName) {
+        Optional<Department> department = departmentRepository.findByName(departmentName);
         if (department.isEmpty()) {
             throw new ExistsException("This department does not exist");
         }
@@ -39,7 +36,10 @@ public class DepartmentService {
     public void updateDepartment(DepartmentDTO departmentDTO,String name) {
         Optional<Department> department = departmentRepository.findByName(departmentDTO.getName());
         if (department.isEmpty()) {
-            throw new ExistsException("This department does not exist");
+            throw new ExistsException("The department you want to update does not exist");
+        }
+        if(departmentRepository.findByName(name).isPresent()) {
+            throw new ExistsException("Duplicate department name");
         }
         Department updatedDepartment = department.get();
         updatedDepartment.setName(name);

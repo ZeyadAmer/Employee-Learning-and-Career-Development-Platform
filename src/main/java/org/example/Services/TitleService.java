@@ -1,16 +1,12 @@
 package org.example.Services;
-
-import org.example.Entities.Department;
 import org.example.Entities.Title;
 import org.example.Exceptions.ExistsException;
-import org.example.Mappers.DepartmentDTO;
 import org.example.Mappers.TitleDTO;
 import org.example.Mappers.TitleMapper;
 import org.example.Repositories.DepartmentRepository;
 import org.example.Repositories.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -35,24 +31,24 @@ public class TitleService {
         }
         titleRepository.save(titleMapper.titleDTOToTitle(titleDTO));
     }
-    public void deleteTitle(TitleDTO titleDTO) {
-        Optional<Title> title = titleRepository.findByName(titleDTO.getName());
+    public void deleteTitle(String titleName) {
+        Optional<Title> title = titleRepository.findByName(titleName);
         if (title.isEmpty()) {
             throw new ExistsException("This title does not exist");
         }
         titleRepository.delete(title.get());
     }
-    public void updateTitleName(TitleDTO titleDTO,String name) {
-        Optional<Title> title = titleRepository.findByName(titleDTO.getName());
+    public void updateTitleName(String oldName,String newName) {
+        Optional<Title> title = titleRepository.findByName(oldName);
         if (title.isEmpty()) {
             throw new ExistsException("This title does not exist");
         }
         Title updatedTitle = title.get();
-        updatedTitle.setName(name);
+        updatedTitle.setName(newName);
         titleRepository.save(updatedTitle);
     }
-    public void updateTitleDepartment(TitleDTO titleDTO,String department) {
-        Optional<Title> title = titleRepository.findByName(titleDTO.getName());
+    public void updateTitleDepartment(String titleName,String department) {
+        Optional<Title> title = titleRepository.findByName(titleName);
         if (title.isEmpty()) {
             throw new ExistsException("This title does not exist");
         }

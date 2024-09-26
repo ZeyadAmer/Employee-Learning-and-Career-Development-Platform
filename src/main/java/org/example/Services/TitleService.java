@@ -26,10 +26,12 @@ public class TitleService {
         if (title.isPresent()) {
             throw new ExistsException("This title already exists");
         }
-        if(departmentRepository.findByName(titleDTO.getDepartment()).isEmpty()){
+        if(departmentRepository.findByName(titleDTO.getDepartment().getName()).isEmpty()){
             throw new ExistsException("This department does not exist");
         }
-        titleRepository.save(titleMapper.titleDTOToTitle(titleDTO));
+        Title newTitle = titleMapper.titleDTOToTitle(titleDTO);
+        newTitle.setDepartment(departmentRepository.findByName(titleDTO.getDepartment().getName()).get());
+        titleRepository.save(newTitle);
     }
     public void deleteTitle(String titleName) {
         Optional<Title> title = titleRepository.findByName(titleName);

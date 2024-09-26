@@ -38,27 +38,27 @@ public class UserService {
         return userMapper.userToUserDTO(user);
 
     }
-    public void createUser(UserDTO userDTO) {
+    public void createUser(UserDTO userDTO,String managerEmail) {
         if(userRepository.findByEmail(userDTO.getEmail()).isPresent()){
             throw new ExistsException("User already exists");
         }
-        if(titleRepository.findByName(userDTO.getTitle()).isEmpty()){
+        if(titleRepository.findByName(userDTO.getTitle().getName()).isEmpty()){
             throw new ExistsException("Title does not exists");
         }
-        if(departmentRepository.findByName(userDTO.getDepartment()).isEmpty()){
-            throw new ExistsException("This department does not exist");
-        }
-        if(userDTO.getEmail().equals(userDTO.getManager())){
+        if(userDTO.getEmail().equals(managerEmail)){
             throw new ExistsException("User can't be managed by himself");
         }
-        if(userRepository.findByEmail(userDTO.getManager()).isEmpty()){
+        if(userRepository.findByEmail(managerEmail).isEmpty()){
             throw new ExistsException("Manager does not exist");
         }
-        User manager = userRepository.findByEmail(userDTO.getManager()).get();
+        User manager = userRepository.findByEmail(managerEmail).get();
         if(!manager.getTitle().isManager()){
             throw new NotManagerException();
         }
+        Title title = titleRepository.findByName(userDTO.getTitle().getName()).get();
         User user = userMapper.userDTOToUser(userDTO);
+        user.setTitle(title);
+        user.setDepartment(title.getDepartment());
         userRepository.save(user);
     }
     public void deleteUser(String email) {

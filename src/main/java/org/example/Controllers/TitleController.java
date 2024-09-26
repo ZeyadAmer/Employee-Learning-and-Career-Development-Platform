@@ -32,7 +32,7 @@ public class TitleController {
         titleService.updateTitleName(oldName, name);
         return ResponseEntity.ok("Title updated");
     }
-    @PutMapping("/{department}")
+    @PutMapping("/department/{department}")
     public ResponseEntity<String> updateTitleDepartment(@PathVariable String department, @RequestBody String titleName) {
         titleService.updateTitleDepartment(titleName,department);
         return ResponseEntity.ok("Title department updated");

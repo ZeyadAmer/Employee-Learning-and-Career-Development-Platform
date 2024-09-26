@@ -4,12 +4,12 @@ import org.example.Entities.Department;
 
 public class TitleDTO {
     private String name;
-    private String department;
+    private DepartmentDTO departmentDTO;
     private boolean isManager;
     public TitleDTO() {}
-    public TitleDTO(String name, String department, boolean isManager) {
+    public TitleDTO(String name, DepartmentDTO departmentDTO, boolean isManager) {
         this.name = name;
-        this.department = department;
+        this.departmentDTO = departmentDTO;
         this.isManager = isManager;
     }
 
@@ -21,12 +21,12 @@ public class TitleDTO {
         this.name = name;
     }
 
-    public String getDepartment() {
-        return department;
+    public DepartmentDTO getDepartment() {
+        return departmentDTO;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartment(DepartmentDTO departmentDTO) {
+        this.departmentDTO = departmentDTO;
     }
     public boolean isManager() {
         return isManager;

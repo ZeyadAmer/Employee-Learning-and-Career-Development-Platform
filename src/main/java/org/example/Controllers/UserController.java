@@ -14,9 +14,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-    @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO) {
-        userService.createUser(userDTO);
+    @PostMapping("/{managerEmail}")
+    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO,@PathVariable String managerEmail) {
+        userService.createUser(userDTO,managerEmail);
         return ResponseEntity.ok("User Created");
     }
     @DeleteMapping
@@ -32,12 +32,12 @@ public class UserController {
     public ResponseEntity<UserDTO> getUser(@RequestBody String email,@RequestBody String password) {
         return ResponseEntity.ok(userService.getUser(email,password));
     }
-    @PutMapping("/{email}")
+    @PutMapping("/reset-pass/{email}")
     public ResponseEntity<String> updateUserPassword(@PathVariable String email,@RequestBody String password) {
         userService.updateUserPassword(email,password);
         return ResponseEntity.ok("password updated successfully");
     }
-    @PutMapping("/{title}")
+    @PutMapping("/title/{title}")
     public ResponseEntity<String> updateUserTitle(@PathVariable String title,@RequestBody String email) {
         userService.updateUserTitle(email,title);
         return ResponseEntity.ok("title updated successfully");

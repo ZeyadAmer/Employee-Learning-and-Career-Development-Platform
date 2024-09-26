@@ -1,0 +1,23 @@
+package org.example.Exceptions;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(ExistsException.class)
+    public ResponseEntity<String> handleExistsException(ExistsException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(NotManagerException.class)
+    public ResponseEntity<String> handleNotManagerException(NotManagerException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(WrongPasswordException.class)
+    public ResponseEntity<String> handleWrongPasswordException(WrongPasswordException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+}

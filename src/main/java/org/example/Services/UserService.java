@@ -20,7 +20,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final TitleRepository titleRepository;
     private final DepartmentRepository departmentRepository;
-    @Autowired
+
     public UserService(UserRepository userRepository, UserMapper userMapper, TitleRepository titleRepository, DepartmentRepository departmentRepository) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;

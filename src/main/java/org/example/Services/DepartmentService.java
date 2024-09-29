@@ -14,7 +14,7 @@ import java.util.Optional;
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapper departmentMapper;
-    @Autowired
+
     public DepartmentService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
         this.departmentRepository = departmentRepository;
         this.departmentMapper = departmentMapper;

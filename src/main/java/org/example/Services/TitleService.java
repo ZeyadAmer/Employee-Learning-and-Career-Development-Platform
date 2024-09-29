@@ -15,7 +15,6 @@ public class TitleService {
     private final TitleRepository titleRepository;
     private final TitleMapper titleMapper;
     private final DepartmentRepository departmentRepository;
-    @Autowired
     public TitleService(TitleRepository titleRepository, TitleMapper titleMapper, DepartmentRepository departmentRepository) {
         this.titleRepository = titleRepository;
         this.titleMapper = titleMapper;

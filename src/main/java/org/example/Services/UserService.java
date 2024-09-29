@@ -9,7 +9,6 @@ import org.example.Mappers.UserMapper;
 import org.example.Repositories.DepartmentRepository;
 import org.example.Repositories.TitleRepository;
 import org.example.Repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -109,6 +108,6 @@ public class UserService {
     }
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
-        return userMapper.usersToUserDTOs(users);
+        return userMapper.usersListToUserDTOsList(users);
     }
 }

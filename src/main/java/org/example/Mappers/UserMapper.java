@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserMapper {
     UserDTO userToUserDTO(User user);
     User userDTOToUser(UserDTO userDTO);
-    List<UserDTO> usersToUserDTOs(List<User> users);
-    List<User> userDTOsToUsers(List<UserDTO> userDTOs);
+    List<UserDTO> usersListToUserDTOsList(List<User> users);
+    List<User> userDTOsListToUsersList(List<UserDTO> userDTOs);
 
 }

@@ -11,7 +11,7 @@ public class ProofTypes {
             strategy = GenerationType.IDENTITY
     )
     private int id;
-    private String proof_type;
+    private String proofType;
     @OneToMany(mappedBy = "proofType", cascade = CascadeType.ALL)
     private List<UserLearning> userLearnings;
     public int getId() {
@@ -23,10 +23,10 @@ public class ProofTypes {
     }
 
     public String getProof_type() {
-        return proof_type;
+        return proofType;
     }
 
     public void setProof_type(String proof_type) {
-        this.proof_type = proof_type;
+        this.proofType = proof_type;
     }
 }

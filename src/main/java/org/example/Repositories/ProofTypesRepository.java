@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProofTypesRepository extends JpaRepository<ProofTypes, Integer> {
-    Optional<ProofTypes> findByName(String name);
+    Optional<ProofTypes> findByProofType(String proofType);
 }

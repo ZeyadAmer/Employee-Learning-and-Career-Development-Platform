@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ScoreboardLevelsRepository extends JpaRepository<ScoreboardLevels, Integer> {
-    Optional<ScoreboardLevels> findByEmail(String email);
+    Optional<ScoreboardLevels> findByLevelName(String levelName);
 }

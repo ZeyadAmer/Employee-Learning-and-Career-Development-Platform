@@ -12,7 +12,7 @@ public class ScoreboardLevels {
             strategy = GenerationType.IDENTITY
     )
     private int id;
-    private String levelname;
+    private String levelName;
     private int minsScore;
 
     public int getId() {
@@ -20,11 +20,11 @@ public class ScoreboardLevels {
     }
 
     public String getLevelname() {
-        return levelname;
+        return levelName;
     }
 
     public void setLevelname(String levelname) {
-        this.levelname = levelname;
+        this.levelName = levelname;
     }
 
     public int getMinsScore() {

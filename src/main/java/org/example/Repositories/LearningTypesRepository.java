@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface LearningTypesRepository extends JpaRepository<LearningTypes, Integer> {
-    Optional<LearningTypes> findByName(String name);
+    Optional<LearningTypes> findByLearningType(String learningType);
 }

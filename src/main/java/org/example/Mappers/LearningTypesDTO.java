@@ -3,6 +3,7 @@ package org.example.Mappers;
 public class LearningTypesDTO {
     private int id;
     private String learningType;
+    private int baseScore;
 
     public LearningTypesDTO(){}
 
@@ -24,5 +25,13 @@ public class LearningTypesDTO {
 
     public void setLearningType(String learningType) {
         this.learningType = learningType;
+    }
+
+    public int getBaseScore() {
+        return baseScore;
+    }
+
+    public void setBaseScore(int baseScore) {
+        this.baseScore = baseScore;
     }
 }

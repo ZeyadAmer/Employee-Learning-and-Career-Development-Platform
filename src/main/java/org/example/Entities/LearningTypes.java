@@ -32,4 +32,12 @@ public class LearningTypes {
     public void setLearning_type(String learning_type) {
         this.learningType = learning_type;
     }
+
+    public int getBaseScore() {
+        return baseScore;
+    }
+
+    public void setBaseScore(int baseScore) {
+        this.baseScore = baseScore;
+    }
 }

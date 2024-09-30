@@ -37,13 +37,13 @@ public class LearningSubjectsService {
         learningSubjectsRepository.delete(learningSubject.get());
     }
 
-    public void updateLearningSubjectName(String subject){
-        Optional<LearningSubjects> learningSubject = learningSubjectsRepository.findBySubject(subject);
+    public void updateLearningSubjectName(String oldName, String newName){
+        Optional<LearningSubjects> learningSubject = learningSubjectsRepository.findBySubject(oldName);
         if(learningSubject.isEmpty()){
             throw new ExistsException("Learning Subject does not exist");
         }
         LearningSubjects updatedLearningSubject = learningSubject.get();
-        updatedLearningSubject.setSubject(subject);
+        updatedLearningSubject.setSubject(newName);
         learningSubjectsRepository.save(updatedLearningSubject);
     }
 

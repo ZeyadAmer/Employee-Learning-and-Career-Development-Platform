@@ -11,7 +11,7 @@ public class UserLearning {
         private int id;
 
         @Column(nullable = false)
-        private int userId;
+        private int userId; // reference userid in UsersDB
 
         @ManyToOne
         @JoinColumn(name = "learning_id", nullable = false)

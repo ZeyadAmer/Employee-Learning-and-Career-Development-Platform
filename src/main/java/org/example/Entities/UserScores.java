@@ -9,6 +9,6 @@ import javax.persistence.*;
 public class UserScores {
     @Id
     @Column(name = "id", nullable = false, unique = true)
-    private int id;
+    private int id; // userId from UsersDB
     private int score;
 }

@@ -10,10 +10,17 @@ public class LearningSubjects {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(EnumType.STRING)
+    private LearningSubjectsType learningSubjectsType;
+
     private String subject;
 
     @OneToMany(mappedBy = "learningSubject", cascade = CascadeType.ALL) // Corrected mappedBy
     private List<Learnings> learnings;
+
+    public enum LearningSubjectsType{
+        FUNCTIONAL, ORGANISATIONAL
+    }
 
     public int getId() {
         return id;

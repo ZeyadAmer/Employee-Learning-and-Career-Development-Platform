@@ -110,4 +110,8 @@ public class UserService {
         List<User> users = userRepository.findAll();
         return userMapper.usersListToUserDTOsList(users);
     }
+    public boolean isAdmin(User user) {
+        return user.getDepartment() != null && "HR".equalsIgnoreCase(user.getDepartment().getName());
+    }
+
 }

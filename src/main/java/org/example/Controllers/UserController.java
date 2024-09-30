@@ -1,10 +1,15 @@
 package org.example.Controllers;
 
+import org.example.Entities.LoginRequest;
 import org.example.Entities.User;
 import org.example.Mappers.UserDTO;
 import org.example.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,8 +34,8 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
     @GetMapping
-    public ResponseEntity<UserDTO> getUser(@RequestBody String email,@RequestBody String password) {
-        return ResponseEntity.ok(userService.getUser(email,password));
+    public ResponseEntity<UserDTO> getUser(@RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(userService.getUser(loginRequest.getEmail(), loginRequest.getPassword()));
     }
     @PutMapping("/reset-pass/{email}")
     public ResponseEntity<String> updateUserPassword(@PathVariable String email,@RequestBody String password) {

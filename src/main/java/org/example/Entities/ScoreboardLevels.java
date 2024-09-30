@@ -13,25 +13,25 @@ public class ScoreboardLevels {
     )
     private int id;
     private String levelName;
-    private int minsScore;
+    private int minScore;
 
     public int getId() {
         return id;
     }
 
-    public String getLevelname() {
+    public String getLevelName() {
         return levelName;
     }
 
-    public void setLevelname(String levelname) {
-        this.levelName = levelname;
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
     }
 
-    public int getMinsScore() {
-        return minsScore;
+    public int getMinScore() {
+        return minScore;
     }
 
-    public void setMinsScore(int minsScore) {
-        this.minsScore = minsScore;
+    public void setMinScore(int minScore) {
+        this.minScore = minScore;
     }
 }

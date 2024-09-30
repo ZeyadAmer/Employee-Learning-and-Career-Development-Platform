@@ -4,10 +4,13 @@ public class ScoreboardLevelsDTO {
     private int id;
     private String levelName;
 
+    private int minScore;
+
     public ScoreboardLevelsDTO(){}
 
-    public ScoreboardLevelsDTO(String levelName){
+    public ScoreboardLevelsDTO(String levelName, int minScore){
         this.levelName = levelName;
+        this.minScore = minScore;
     }
 
     public String getLevelName() {
@@ -24,5 +27,13 @@ public class ScoreboardLevelsDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getMinScore() {
+        return minScore;
+    }
+
+    public void setMinScore(int minScore) {
+        this.minScore = minScore;
     }
 }

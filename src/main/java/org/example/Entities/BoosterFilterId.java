@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.persistence.*;
 
 @Embeddable
-public class BoosterFiltersId implements Serializable {
+public class BoosterFilterId implements Serializable {
 
     @Column(name = "booster_id")
     private int boosterId;
@@ -15,9 +15,9 @@ public class BoosterFiltersId implements Serializable {
 
     // Constructors, getters, setters, equals, and hashCode methods
 
-    public BoosterFiltersId() {}
+    public BoosterFilterId() {}
 
-    public BoosterFiltersId(int boosterId, int learningTypeId) {
+    public BoosterFilterId(int boosterId, int learningTypeId) {
         this.boosterId = boosterId;
         this.learningTypeId = learningTypeId;
     }
@@ -42,7 +42,7 @@ public class BoosterFiltersId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BoosterFiltersId that = (BoosterFiltersId) o;
+        BoosterFilterId that = (BoosterFilterId) o;
         return boosterId == that.boosterId && learningTypeId == that.learningTypeId;
     }
 

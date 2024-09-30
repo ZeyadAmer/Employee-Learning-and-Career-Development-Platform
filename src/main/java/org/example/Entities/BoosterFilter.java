@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class BoosterFilter {
 
     @EmbeddedId
-    private BoosterFiltersId id;
+    private BoosterFilterId id;
 
     @ManyToOne
     @MapsId("boosterId")
@@ -23,16 +23,16 @@ public class BoosterFilter {
     public BoosterFilter() {}
 
     public BoosterFilter(Booster booster, LearningTypes learningType) {
-        this.id = new BoosterFiltersId(booster.getId(), learningType.getId());
+        this.id = new BoosterFilterId(booster.getId(), learningType.getId());
         this.booster = booster;
         this.learningType = learningType;
     }
 
-    public BoosterFiltersId getId() {
+    public BoosterFilterId getId() {
         return id;
     }
 
-    public void setId(BoosterFiltersId id) {
+    public void setId(BoosterFilterId id) {
         this.id = id;
     }
 

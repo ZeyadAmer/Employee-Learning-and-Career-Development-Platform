@@ -26,11 +26,16 @@ public class BoosterController {
         return ResponseEntity.ok("Booster deleted");
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateBooster(@RequestBody String oldName, String newName,
-                                                boolean isActive, String boosterTypeName){
-        boosterService.updateBooster(oldName, newName, isActive, boosterTypeName);
-        return ResponseEntity.ok("Booster updated.");
+    @PutMapping("/updateName/{oldName}")
+    public ResponseEntity<String> updateBoosterName(@PathVariable String oldName, @RequestBody String newName){
+        boosterService.updateBoosterName(oldName, newName);
+        return ResponseEntity.ok("Booster name updated.");
+    }
+
+    @PutMapping("/updateBoosterType/{boosterTypeName}")
+    public ResponseEntity<String> updateBoosterType(@PathVariable String boosterTypeName, @RequestBody String boosterName){
+        boosterService.updateBoosterType(boosterName, boosterTypeName);
+        return ResponseEntity.ok("Booster Type updated");
     }
 
     @GetMapping("/{name}")

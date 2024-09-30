@@ -45,4 +45,12 @@ public class LearningSubjects {
     public void setLearnings(List<Learnings> learnings) {
         this.learnings = learnings;
     }
+
+    public LearningSubjectsType getLearningSubjectsType() {
+        return learningSubjectsType;
+    }
+
+    public void setLearningSubjectsType(LearningSubjectsType learningSubjectsType) {
+        this.learningSubjectsType = learningSubjectsType;
+    }
 }

@@ -7,14 +7,14 @@ import java.util.List;
 @Table(name = "learning_subjects")
 public class LearningSubjects {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private enum subjectType{Functional,Organisational};
+
     private String subject;
-    @OneToMany(mappedBy = "learning_subject", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "learningSubject", cascade = CascadeType.ALL) // Corrected mappedBy
     private List<Learnings> learnings;
+
     public int getId() {
         return id;
     }
@@ -29,5 +29,13 @@ public class LearningSubjects {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public List<Learnings> getLearnings() {
+        return learnings;
+    }
+
+    public void setLearnings(List<Learnings> learnings) {
+        this.learnings = learnings;
     }
 }

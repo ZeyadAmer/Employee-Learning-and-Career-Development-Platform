@@ -14,12 +14,13 @@ public class JwtUtil {
     private final String SECRET_KEY = "your_secret_key"; // Change this to a secure key
     private final long EXPIRATION_TIME = 86400000; // 1 day
 
-    public String generateToken(String email, String departmentName) {
+    public String generateToken(String email, String departmentName, int userId) {
         // Determine role based on department name
         String role = departmentName.equalsIgnoreCase("HR") ? "ROLE_ADMIN" : "ROLE_USER";
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
+        claims.put("userId", userId);  // Add userId as an int to the token
 
         // Create the JWT token using the claims and other parameters
         return Jwts.builder()
@@ -30,6 +31,7 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
+
 
     public Claims extractClaims(String token) {
         return Jwts.parser()
@@ -49,6 +51,11 @@ public class JwtUtil {
     public boolean isTokenExpired(String token) {
         return extractClaims(token).getExpiration().before(new Date());
     }
+    public int extractUserId(String token) {
+        return (int) extractClaims(token).get("userId");  // Extract userId as an int
+    }
+
+
 
     public boolean validateToken(String token, String email) {
         String username = extractUsername(token);

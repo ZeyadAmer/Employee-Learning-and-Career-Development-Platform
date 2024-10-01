@@ -45,41 +45,24 @@ public class UsersServiceTests {
     @Test
     public void GetUser_Succes(){
         User user = new User();
-        user.setEmail("email@email.com");
-        user.setPassword("password");
         UserDTO userDto1 = new UserDTO();
-        userDto1.setEmail("email@email.com");
-        Mockito.when(userRepository.findByEmail("email@email.com")).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findById(1)).thenReturn(Optional.of(user));
         Mockito.when(userMapper.userToUserDTO(user)).thenReturn(userDto1);
-        UserDTO userDTO = userService.getUser("email@email.com","password");
+        UserDTO userDTO = userService.getUser(1);
         assertEquals("email@email.com",userDTO.getEmail());
     }
     @Test
     public void GetUser_NotExist(){
         User user = new User();
-        user.setEmail("email@email.com");
-        user.setPassword("password");
         UserDTO userDto1 = new UserDTO();
-        userDto1.setEmail("email@email.com");
-        Mockito.when(userRepository.findByEmail("email@email.com")).thenReturn(Optional.empty());
+        Mockito.when(userRepository.findById(1)).thenReturn(Optional.empty());
         Mockito.when(userMapper.userToUserDTO(user)).thenReturn(userDto1);
-        assertThrows(ExistsException.class,()->userService.getUser("email@email.com","password"));
+        assertThrows(ExistsException.class,()->userService.getUser(1));
     }
+
     @Test
-    public void GetUser_WrongPassword(){
+    public void DeleteUser_Success(){
         User user = new User();
-        user.setEmail("email@email.com");
-        user.setPassword("password");
-        UserDTO userDto1 = new UserDTO();
-        userDto1.setEmail("email@email.com");
-        Mockito.when(userRepository.findByEmail("email@email.com")).thenReturn(Optional.of(user));
-        Mockito.when(userMapper.userToUserDTO(user)).thenReturn(userDto1);
-        assertThrows(WrongPasswordException.class,()->userService.getUser("email@email.com","passwd"));
-    }
-    @Test
-    public void DeleteUser_Succes(){
-        User user = new User();
-        user.setEmail("email@email.com");
         Mockito.when(userRepository.findByEmail("email@email.com")).thenReturn(Optional.of(user));
         userService.deleteUser("email@email.com");
     }

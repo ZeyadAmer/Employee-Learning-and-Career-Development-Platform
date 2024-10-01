@@ -32,7 +32,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.substring(7);  // Remove "Bearer " prefix
             String username = jwtUtil.extractUsername(token);  // Extract the username from token
             String role = jwtUtil.extractRole(token);          // Extract role (e.g., "ROLE_ADMIN")
-
+            int id = jwtUtil.extractUserId(token);
+            System.out.println("username : " + username + " role : " + role + " id : " + id);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority(role)));

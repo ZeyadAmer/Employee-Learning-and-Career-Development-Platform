@@ -26,7 +26,15 @@ public class UserService {
         this.titleRepository = titleRepository;
         this.departmentRepository = departmentRepository;
     }
-    public UserDTO getUser(String email, String password){
+    public UserDTO getUser(int id){
+        if(userRepository.findById(id).isEmpty()){
+            throw new ExistsException("User does not exists");
+        }
+        User user = userRepository.findById(id).get();
+        return userMapper.userToUserDTO(user);
+
+    }
+    public User getUserID(String email, String password){
         if(userRepository.findByEmail(email).isEmpty()){
             throw new ExistsException("User does not exists");
         }
@@ -34,8 +42,7 @@ public class UserService {
         if(!user.getPassword().equals(password)){
             throw new WrongPasswordException();
         }
-        return userMapper.userToUserDTO(user);
-
+        return userRepository.findByEmail(email).get();
     }
     public void createUser(UserDTO userDTO,String managerEmail) {
         if(userRepository.findByEmail(userDTO.getEmail()).isPresent()){

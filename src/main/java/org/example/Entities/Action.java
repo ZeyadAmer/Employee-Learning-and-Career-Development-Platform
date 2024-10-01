@@ -1,6 +1,7 @@
 package org.example.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(
@@ -15,10 +16,14 @@ public class Action {
     private int id;
     private String name;
 
+    @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NotificationData> notificationData;
+
     public Action(){}
 
-    public Action(String name){
+    public Action(String name, List<NotificationData> notificationData){
         this.name = name;
+        this.notificationData = notificationData;
     }
 
     public int getId() {
@@ -35,5 +40,13 @@ public class Action {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<NotificationData> getNotificationData() {
+        return notificationData;
+    }
+
+    public void setNotificationData(List<NotificationData> notificationData) {
+        this.notificationData = notificationData;
     }
 }

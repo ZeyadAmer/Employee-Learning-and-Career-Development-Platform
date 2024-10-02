@@ -15,11 +15,11 @@ public class NotificationData {
     private Date date;
     private int entityId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "action_id", nullable = false)
     private Action action;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "entity_type_name", referencedColumnName = "name")
     private EntitiesType entitiesType;
 

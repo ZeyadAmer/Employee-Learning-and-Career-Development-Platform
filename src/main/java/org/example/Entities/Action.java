@@ -21,9 +21,8 @@ public class Action {
 
     public Action(){}
 
-    public Action(String name, List<NotificationData> notificationData){
+    public Action(String name){
         this.name = name;
-        this.notificationData = notificationData;
     }
 
     public int getId() {

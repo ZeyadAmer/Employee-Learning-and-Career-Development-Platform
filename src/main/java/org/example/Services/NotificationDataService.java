@@ -36,37 +36,18 @@ public class NotificationDataService {
         if (notificationDataRepository.findById(notificationDataDTO.getId()).isPresent()) {
             throw new ExistsException("Notification Data already exists.");
         }
-
-        // Validate that actionDTO is provided
-        if (notificationDataDTO.getActionDTO() == null) {
-            throw new IllegalArgumentException("ActionDTO is required.");
-        }
-
-        // Validate that entitiesTypeDTO is provided
-        if (notificationDataDTO.getEntitiesTypeDTO() == null) {
-            throw new IllegalArgumentException("EntitiesTypeDTO is required.");
-        }
-
-        // Fetch the Action by name
-        Optional<Action> action = actionRepository.findByName(notificationDataDTO.getActionDTO().getName());
-        if (action.isEmpty()) {
+        if(actionRepository.findByName(notificationDataDTO.getActionDTO().getName()).isEmpty()){
             throw new ExistsException("Action does not exist.");
         }
-
-        // Fetch the EntitiesType by name
-        Optional<EntitiesType> entitiesType = entitiesTypeRepository.findById(notificationDataDTO.getEntitiesTypeDTO().getName());
-        if (entitiesType.isEmpty()) {
-            throw new ExistsException("Entity Type does not exist.");
+        if(entitiesTypeRepository.findById(notificationDataDTO.getEntitiesTypeDTO().getName()).isEmpty()){
+            throw new ExistsException("Entities Type does not exist.");
         }
 
-        // Create and populate the NotificationData entity
-        NotificationData notificationData = new NotificationData();
-        notificationData.setId(notificationDataDTO.getId());
-        notificationData.setActorId(notificationDataDTO.getActorId());
-        notificationData.setDate(notificationDataDTO.getDate());
-        notificationData.setEntityId(notificationDataDTO.getEntityId());
-        notificationData.setAction(action.get());
-        notificationData.setEntitiesType(entitiesType.get());
+        Action action = actionRepository.findByName(notificationDataDTO.getActionDTO().getName()).get();
+        EntitiesType entitiesType = entitiesTypeRepository.findById(notificationDataDTO.getEntitiesTypeDTO().getName()).get();
+        NotificationData notificationData = notificationDataMapper.notificationDatoDTOToNotificationData(notificationDataDTO);
+        notificationData.setEntitiesType(entitiesType);
+        notificationData.setAction(action);
 
         // Save the NotificationData entity
         notificationDataRepository.save(notificationData);

@@ -71,5 +71,10 @@ public class ScoreboardLevelsService {
     }
 
 
+    public String getScoreboardLevelByScore(int score) {
+        String scoreBoardLevel = scoreboardLevelsRepository.findLevelNameByMinScore(score);
+        System.out.println(scoreBoardLevel);
+        return scoreBoardLevel;
 
+    }
 }

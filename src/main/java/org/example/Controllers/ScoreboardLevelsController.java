@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/scoreboardLevels")
 public class ScoreboardLevelsController {
@@ -42,6 +42,12 @@ public class ScoreboardLevelsController {
     @GetMapping("/{levelName}")
     public ResponseEntity<ScoreboardLevelsDTO> getScoreboardLevel(@PathVariable String levelName){
         return ResponseEntity.ok(scoreboardLevelsService.getScoreboardLevel(levelName));
+    }
+    @GetMapping("/levelName/{score}")
+    public ResponseEntity<String> getScoreboardLevelByScore(@PathVariable String score){
+        int scoreInt = Integer.parseInt(score);
+        String levelName = scoreboardLevelsService.getScoreboardLevelByScore(scoreInt);
+        return ResponseEntity.ok("{\"levelName\":\"" + levelName + "\"}");
     }
 
     @GetMapping("/all")

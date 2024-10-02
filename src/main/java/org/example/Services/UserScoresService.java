@@ -55,7 +55,7 @@ public class UserScoresService {
     }
 
     public List<UserScoresDTO> getAllUserScores(){
-        List<UserScores> userScores = userScoresRepository.findAll();
+        List<UserScores> userScores = userScoresRepository.findAllByOrderByScoreDesc();
         return userScoresMapper.userScoresListToUserScoresDTOsList(userScores);
     }
 }

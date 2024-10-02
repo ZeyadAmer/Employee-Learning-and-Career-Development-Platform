@@ -17,7 +17,7 @@ public class User {
     private String email;
     private String password;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
+    @JoinColumn(name = "manager_id", nullable = true)
     private User manager;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dept_id")

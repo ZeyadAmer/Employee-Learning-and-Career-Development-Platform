@@ -65,6 +65,7 @@ public class UserService {
         User user = userMapper.userDTOToUser(userDTO);
         user.setTitle(title);
         user.setDepartment(title.getDepartment());
+        user.setManager(manager);
         userRepository.save(user);
     }
     public void deleteUser(String email) {

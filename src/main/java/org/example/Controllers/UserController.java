@@ -41,6 +41,10 @@ public class UserController {
         int id = jwtUtil.extractUserId(token);
         return ResponseEntity.ok(userService.getUser(id));
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable int id) {
+        return ResponseEntity.ok(userService.getUser(id));
+    }
     @PutMapping("/reset-pass/{email}")
     public ResponseEntity<String> updateUserPassword(@PathVariable String email,@RequestBody String password) {
         userService.updateUserPassword(email,password);

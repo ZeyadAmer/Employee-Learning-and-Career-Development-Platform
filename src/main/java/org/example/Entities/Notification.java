@@ -16,14 +16,15 @@ public class Notification {
     private boolean isSeen;
 
     @ManyToOne
-    @JoinColumn(name = "notification_data_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "notification_data_id", insertable = false, updatable = false)
     private NotificationData notificationData;
 
     public Notification() {}
 
-    public Notification(NotificationId notificationId, boolean isSeen) {
+    public Notification(NotificationId notificationId, boolean isSeen, NotificationData notificationData1) {
         this.notificationId = notificationId;
         this.isSeen = isSeen;
+        this.notificationData = notificationData1;
     }
 
     public NotificationId getNotificationId() {

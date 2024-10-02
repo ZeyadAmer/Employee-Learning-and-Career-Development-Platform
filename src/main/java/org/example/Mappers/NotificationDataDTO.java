@@ -8,16 +8,16 @@ public class NotificationDataDTO {
     private int id;
     private int actorId;
     private Date date;
-    private ActionDTO actionDTO;
-    private EntitiesTypeDTO entitiesTypeDTO;
+    private ActionDTO action;
+    private EntitiesTypeDTO entitiesType;
     private int entityId;
 
-    public NotificationDataDTO(int actorId, Date date, EntitiesTypeDTO entitiesTypeDTO, int entityId, ActionDTO actionDTO) {
+    public NotificationDataDTO(int actorId, Date date, EntitiesTypeDTO entitiesType, int entityId, ActionDTO action) {
         this.actorId = actorId;
         this.date = date;
         this.entityId = entityId;
-        this.actionDTO = actionDTO;
-        this.entitiesTypeDTO = entitiesTypeDTO;
+        this.action = action;
+        this.entitiesType = entitiesType;
     }
 
     public int getActorId() {
@@ -36,12 +36,12 @@ public class NotificationDataDTO {
         this.date = date;
     }
 
-    public ActionDTO getActionDTO() {
-        return actionDTO;
+    public ActionDTO getAction() {
+        return action;
     }
 
-    public void setActionDTO(ActionDTO actionDTO) {
-        this.actionDTO = actionDTO;
+    public void setAction(ActionDTO actionDTO) {
+        this.action = actionDTO;
     }
 
     public int getId() {
@@ -52,12 +52,12 @@ public class NotificationDataDTO {
         this.id = id;
     }
 
-    public EntitiesTypeDTO getEntitiesTypeDTO() {
-        return entitiesTypeDTO;
+    public EntitiesTypeDTO getEntitiesType() {
+        return entitiesType;
     }
 
-    public void setEntitiesTypeDTO(EntitiesTypeDTO entitiesTypeDTO) {
-        this.entitiesTypeDTO = entitiesTypeDTO;
+    public void setEntitiesType(EntitiesTypeDTO entitiesTypeDTO) {
+        this.entitiesType = entitiesTypeDTO;
     }
 
     public int getEntityId() {

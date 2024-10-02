@@ -24,7 +24,6 @@ public class NotificationDataService {
     private ActionRepository actionRepository;
     private EntitiesTypeRepository entitiesTypeRepository;
 
-    @Autowired
     public NotificationDataService(NotificationDataRepository notificationDataRepository, NotificationDataMapper notificationDataMapper, ActionRepository actionRepository, EntitiesTypeRepository entitiesTypeRepository) {
         this.notificationDataRepository = notificationDataRepository;
         this.notificationDataMapper = notificationDataMapper;
@@ -36,15 +35,15 @@ public class NotificationDataService {
         if (notificationDataRepository.findById(notificationDataDTO.getId()).isPresent()) {
             throw new ExistsException("Notification Data already exists.");
         }
-        if(actionRepository.findByName(notificationDataDTO.getActionDTO().getName()).isEmpty()){
+        if(actionRepository.findByName(notificationDataDTO.getAction().getName()).isEmpty()){
             throw new ExistsException("Action does not exist.");
         }
-        if(entitiesTypeRepository.findById(notificationDataDTO.getEntitiesTypeDTO().getName()).isEmpty()){
+        if(entitiesTypeRepository.findById(notificationDataDTO.getEntitiesType().getName()).isEmpty()){
             throw new ExistsException("Entities Type does not exist.");
         }
 
-        Action action = actionRepository.findByName(notificationDataDTO.getActionDTO().getName()).get();
-        EntitiesType entitiesType = entitiesTypeRepository.findById(notificationDataDTO.getEntitiesTypeDTO().getName()).get();
+        Action action = actionRepository.findByName(notificationDataDTO.getAction().getName()).get();
+        EntitiesType entitiesType = entitiesTypeRepository.findById(notificationDataDTO.getEntitiesType().getName()).get();
         NotificationData notificationData = notificationDataMapper.notificationDatoDTOToNotificationData(notificationDataDTO);
         notificationData.setEntitiesType(entitiesType);
         notificationData.setAction(action);
@@ -66,11 +65,11 @@ public class NotificationDataService {
         if(notificationData.isEmpty()){
             throw new ExistsException("Notification Data does not exist.");
         }
-        Optional<Action> action = actionRepository.findByName(notificationDataDTO.getActionDTO().getName());
+        Optional<Action> action = actionRepository.findByName(notificationDataDTO.getAction().getName());
         if(action.isEmpty()){
             throw new ExistsException("Action does not exist.");
         }
-        Optional<EntitiesType> entitiesType = entitiesTypeRepository.findById(notificationDataDTO.getEntitiesTypeDTO().getName());
+        Optional<EntitiesType> entitiesType = entitiesTypeRepository.findById(notificationDataDTO.getEntitiesType().getName());
         if(entitiesType.isEmpty()){
             throw new ExistsException("Entity Type does not exist.");
         }

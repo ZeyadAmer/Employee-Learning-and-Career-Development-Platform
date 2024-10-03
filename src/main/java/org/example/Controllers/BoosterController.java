@@ -32,10 +32,10 @@ public class BoosterController {
         return ResponseEntity.ok("Booster name updated.");
     }
 
-    @PutMapping("/updateBoosterActive/{name}")
-    public ResponseEntity<String> updateBoosterActivity(@PathVariable String name, @RequestBody boolean isActive){
-        boosterService.updateBoosterActivity(name, isActive);
-        return ResponseEntity.ok("Booster name updated.");
+    @PutMapping("/updateBoosterActivity")
+    public ResponseEntity<String> updateBoosterActivity(@RequestBody BoosterDTO[] boosterDTOS){
+        boosterService.updateBoosterActivity(boosterDTOS);
+        return ResponseEntity.ok("{\"updateBoosterActivity\":\"" + "Booster activity updated" + "\"}");
     }
 
     @PutMapping("/updateBoosterType/{boosterTypeName}")

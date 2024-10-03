@@ -61,15 +61,18 @@ public class BoosterService {
         boosterRepository.save(updatedBooster);
     }
 
-    public void updateBoosterActivity(String oldName, boolean isActive){
-        Optional<Booster> booster = boosterRepository.findByName(oldName);
-        if(booster.isEmpty()){
-            throw new ExistsException("Booster Name does not exist");
+    public void updateBoosterActivity(BoosterDTO[] boosterDTOs){
+        for(BoosterDTO boosterDTO : boosterDTOs){
+            Optional<Booster> booster = boosterRepository.findByName(boosterDTO.getName());
+            if(booster.isEmpty()){
+                throw new ExistsException("Booster Name does not exist");
+            }
+
+            Booster updatedBooster = booster.get();
+            updatedBooster.setActive(boosterDTO.isActive());
+            boosterRepository.save(updatedBooster);
         }
 
-        Booster updatedBooster = booster.get();
-        updatedBooster.setActive(isActive);
-        boosterRepository.save(updatedBooster);
     }
 
     public void updateBoosterType(String boosterName, String boosterTypeName){

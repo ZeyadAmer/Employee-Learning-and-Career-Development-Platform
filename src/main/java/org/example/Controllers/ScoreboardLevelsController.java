@@ -1,5 +1,6 @@
 package org.example.Controllers;
 
+import org.example.Entities.ScoreboardLevels;
 import org.example.Mappers.ScoreboardLevelsDTO;
 import org.example.Services.ScoreboardLevelsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ScoreboardLevelsController {
     @PostMapping
     public ResponseEntity<String> createScoreBoardLevel(@RequestBody ScoreboardLevelsDTO scoreboardLevelsDTO){
         scoreboardLevelsService.createScoreBoardLevel(scoreboardLevelsDTO);
-        return ResponseEntity.ok("Scoreboard Level created.");
+        return ResponseEntity.ok("{\"created\":\"" + "Scoreboard Level created." + "\"}");
     }
 
     @DeleteMapping("/{levelName}")
@@ -53,5 +54,10 @@ public class ScoreboardLevelsController {
     @GetMapping("/all")
     public ResponseEntity<List<ScoreboardLevelsDTO>> getAllScoreboardLevels(){
         return ResponseEntity.ok(scoreboardLevelsService.getAllScoreboardLevels());
+    }
+    @GetMapping("/count")
+    public ResponseEntity<String> getScoreboardLevelsSize(){
+        int count = scoreboardLevelsService.getAllScoreboardLevels().size();
+        return ResponseEntity.ok("{\"levels\":\"" + count + "\"}");
     }
 }

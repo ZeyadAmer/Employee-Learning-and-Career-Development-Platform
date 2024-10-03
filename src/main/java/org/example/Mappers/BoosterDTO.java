@@ -7,14 +7,14 @@ public class BoosterDTO {
     private int id;
     private String name;
     private boolean isActive;
-    private BoosterTypeDTO boosterTypeDTO;
+    private BoosterTypeDTO boosterType;
 
     public BoosterDTO(){}
 
-    public BoosterDTO(String name, boolean isActive, BoosterTypeDTO boosterTypeDTO){
+    public BoosterDTO(String name, boolean isActive, BoosterTypeDTO boosterType){
         this.name = name;
         this.isActive = isActive;
-        this.boosterTypeDTO = boosterTypeDTO;
+        this.boosterType = boosterType;
     }
 
     public int getId() {
@@ -42,10 +42,10 @@ public class BoosterDTO {
     }
 
     public BoosterTypeDTO getBoosterType() {
-        return boosterTypeDTO;
+        return boosterType;
     }
 
     public void setBoosterType(BoosterTypeDTO boosterTypeDTO) {
-        this.boosterTypeDTO = boosterTypeDTO;
+        this.boosterType = boosterTypeDTO;
     }
 }

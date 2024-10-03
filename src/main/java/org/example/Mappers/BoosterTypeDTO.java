@@ -4,12 +4,13 @@ public class BoosterTypeDTO {
     private int id;
     private String name;
     private int value;
-
+    private boolean isActive;
     public BoosterTypeDTO(){}
 
-    public BoosterTypeDTO(String name, int value){
+    public BoosterTypeDTO(String name, int value, boolean isActive){
         this.name = name;
         this.value = value;
+        this.isActive = isActive;
     }
 
     public int getId() {
@@ -34,5 +35,13 @@ public class BoosterTypeDTO {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

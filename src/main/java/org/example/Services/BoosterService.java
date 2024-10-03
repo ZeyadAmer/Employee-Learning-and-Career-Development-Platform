@@ -61,6 +61,17 @@ public class BoosterService {
         boosterRepository.save(updatedBooster);
     }
 
+    public void updateBoosterActivity(String oldName, boolean isActive){
+        Optional<Booster> booster = boosterRepository.findByName(oldName);
+        if(booster.isEmpty()){
+            throw new ExistsException("Booster Name does not exist");
+        }
+
+        Booster updatedBooster = booster.get();
+        updatedBooster.setActive(isActive);
+        boosterRepository.save(updatedBooster);
+    }
+
     public void updateBoosterType(String boosterName, String boosterTypeName){
         Optional<Booster> booster = boosterRepository.findByName(boosterName);
         if(booster.isEmpty()){

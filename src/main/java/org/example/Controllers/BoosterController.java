@@ -17,7 +17,7 @@ public class BoosterController {
     @PostMapping
     public ResponseEntity<String> createBooster(@RequestBody BoosterDTO boosterDTO){
         boosterService.createBooster(boosterDTO);
-        return ResponseEntity.ok("Booster created");
+        return ResponseEntity.ok("{\"Response\":\"" + "Booster created" + "\"}");
     }
 
     @DeleteMapping

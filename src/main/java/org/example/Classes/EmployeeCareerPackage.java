@@ -12,8 +12,10 @@ public class EmployeeCareerPackage {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
     private int employeeId; // from userDB
-    //@Lob
+    @Lob // for large amount of data
     private byte[] careerPackage;
+    @OneToOne(mappedBy = "employeeCareerPackage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private SubmittedCareerPackage submittedCareerPackage;
 
     public EmployeeCareerPackage(){}
 
@@ -44,5 +46,13 @@ public class EmployeeCareerPackage {
 
     public void setCareerPackage(byte[] careerPackage) {
         this.careerPackage = careerPackage;
+    }
+
+    public SubmittedCareerPackage getSubmittedCareerPackage() {
+        return submittedCareerPackage;
+    }
+
+    public void setSubmittedCareerPackage(SubmittedCareerPackage submittedCareerPackage) {
+        this.submittedCareerPackage = submittedCareerPackage;
     }
 }

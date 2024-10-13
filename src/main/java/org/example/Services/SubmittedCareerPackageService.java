@@ -1,0 +1,59 @@
+package org.example.Services;
+
+import org.example.Classes.EmployeeCareerPackage;
+import org.example.Classes.SubmittedCareerPackage;
+import org.example.Exceptions.ExistsException;
+import org.example.Mappers.SubmittedCareerPackageDTO;
+import org.example.Mappers.SubmittedCareerPackageMapper;
+import org.example.Repository.EmployeeCareerPackageRepository;
+import org.example.Repository.SubmittedCareerPackageRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class SubmittedCareerPackageService {
+
+    private final SubmittedCareerPackageRepository submittedCareerPackageRepository;
+    private final SubmittedCareerPackageMapper submittedCareerPackageMapper;
+    private final EmployeeCareerPackageRepository employeeCareerPackageRepository;
+
+    public SubmittedCareerPackageService(SubmittedCareerPackageRepository submittedCareerPackageRepository, SubmittedCareerPackageMapper submittedCareerPackageMapper, EmployeeCareerPackageRepository employeeCareerPackageRepository) {
+        this.submittedCareerPackageRepository = submittedCareerPackageRepository;
+        this.submittedCareerPackageMapper = submittedCareerPackageMapper;
+        this.employeeCareerPackageRepository = employeeCareerPackageRepository;
+    }
+
+    public void createSubmittedCareerPackage(SubmittedCareerPackageDTO submittedCareerPackageDTO){
+        Optional<EmployeeCareerPackage> employeeCareerPackage = employeeCareerPackageRepository.findById(submittedCareerPackageDTO.getEmployeeCareerPackage().getId());
+        if(employeeCareerPackage.isEmpty()){
+            throw new ExistsException("Employee Career Package does not exist");
+        }
+        SubmittedCareerPackage submittedCareerPackage = submittedCareerPackageMapper.submittedCareerPackageDTOToSubmittedCareerPackage(submittedCareerPackageDTO);
+        submittedCareerPackage.setEmployeeCareerPackage(employeeCareerPackage.get());
+        submittedCareerPackageRepository.save(submittedCareerPackage);
+    }
+
+    public void deleteSubmittedCareerPackage(int id){
+        Optional<SubmittedCareerPackage> submittedCareerPackage = submittedCareerPackageRepository.findById(id);
+        if(submittedCareerPackage.isEmpty()){
+            throw new ExistsException("Submitted Career Package does not exist");
+        }
+        submittedCareerPackageRepository.delete(submittedCareerPackage.get());
+    }
+
+    public SubmittedCareerPackageDTO getSubmittedCareerPackage(int id){
+        Optional<SubmittedCareerPackage> submittedCareerPackage = submittedCareerPackageRepository.findById(id);
+        if(submittedCareerPackage.isEmpty()){
+            throw new ExistsException("Submitted Career Package does not exist");
+        }
+        return submittedCareerPackageMapper.submittedCareerPackageToSubmittedCareerPackageDTO(submittedCareerPackage.get());
+    }
+
+    public List<SubmittedCareerPackageDTO> getAllSubmittedCareerPackages(){
+        List<SubmittedCareerPackage> submittedCareerPackages = submittedCareerPackageRepository.findAll();
+        return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackages);
+    }
+
+}

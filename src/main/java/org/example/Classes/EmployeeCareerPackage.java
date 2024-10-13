@@ -1,6 +1,7 @@
 package org.example.Classes;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(
@@ -16,12 +17,17 @@ public class EmployeeCareerPackage {
     private byte[] careerPackage;
     @OneToOne(mappedBy = "employeeCareerPackage", cascade = CascadeType.ALL, orphanRemoval = true)
     private SubmittedCareerPackage submittedCareerPackage;
+    private String careerPackageName;
+    private Date date;
 
     public EmployeeCareerPackage(){}
 
-    public EmployeeCareerPackage(int employeeId, byte[] careerPackage) {
+    public EmployeeCareerPackage(int employeeId, byte[] careerPackage, SubmittedCareerPackage submittedCareerPackage, String careerPackageName, Date date) {
         this.employeeId = employeeId;
         this.careerPackage = careerPackage;
+        this.submittedCareerPackage = submittedCareerPackage;
+        this.careerPackageName = careerPackageName;
+        this.date = date;
     }
 
     public int getId() {
@@ -54,5 +60,21 @@ public class EmployeeCareerPackage {
 
     public void setSubmittedCareerPackage(SubmittedCareerPackage submittedCareerPackage) {
         this.submittedCareerPackage = submittedCareerPackage;
+    }
+
+    public String getCareerPackageName() {
+        return careerPackageName;
+    }
+
+    public void setCareerPackageName(String careerPackageName) {
+        this.careerPackageName = careerPackageName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

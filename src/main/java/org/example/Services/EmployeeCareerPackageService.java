@@ -6,6 +6,7 @@ import org.example.Mappers.EmployeeCareerPackageDTO;
 import org.example.Mappers.EmployeeCareerPackageMapper;
 import org.example.Repository.EmployeeCareerPackageRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,8 +57,10 @@ public class EmployeeCareerPackageService {
         return employeeCareerPackageMapper.employeeCareerPackageToEmployeeCareerPackageDTO(employeeCareerPackage.get());
     }
 
+    @Transactional
     public List<EmployeeCareerPackageDTO> getEmployeeCareerPackages(int employeeId){
         Optional<List<EmployeeCareerPackage>> employeeCareerPackages = employeeCareerPackageRepository.findByEmployeeId(employeeId);
+        System.out.println(employeeCareerPackages);
         return employeeCareerPackageMapper.employeeCareerPackageListToEmployeeCareerPackageDTOList(employeeCareerPackages.get());
     }
 

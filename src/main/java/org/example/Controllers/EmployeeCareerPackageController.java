@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200") // for CORS
 @RequestMapping("/employeeCareerPackages")
 public class EmployeeCareerPackageController {
 
@@ -18,11 +20,12 @@ public class EmployeeCareerPackageController {
     private EmployeeCareerPackageService employeeCareerPackageService;
 
     @PostMapping
-    public ResponseEntity<String> createEmployeeCareerPackage(@RequestParam("employeeId") int employeeId, @RequestParam("careerPackage") MultipartFile file) throws IOException {
+    public ResponseEntity<String> createEmployeeCareerPackage(@RequestParam("employeeId") int employeeId, @RequestParam("careerPackage") MultipartFile file, @RequestParam("careerPackageName") String careerPackageName, @RequestParam("date")Date date) throws IOException {
         byte[] careerPackage = file.getBytes();
-        EmployeeCareerPackageDTO employeeCareerPackageDTO = new EmployeeCareerPackageDTO(employeeId, careerPackage);
+        EmployeeCareerPackageDTO employeeCareerPackageDTO = new EmployeeCareerPackageDTO(employeeId, careerPackage, careerPackageName, date);
         employeeCareerPackageService.createEmployeeCareerPackage(employeeCareerPackageDTO);
-        return ResponseEntity.ok("Employee Career Package created.");
+        String jsonResponse = String.format("{\"message\": \"%s\"}", "Employee Career Package created.");
+        return ResponseEntity.ok(jsonResponse);
     }
 
     @DeleteMapping

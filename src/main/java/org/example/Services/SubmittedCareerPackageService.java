@@ -80,4 +80,12 @@ public class SubmittedCareerPackageService {
         return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackages);
     }
 
+    public byte[] downloadSubmittedCareerPackage(int id){
+        Optional<SubmittedCareerPackage> submittedCareerPackage = submittedCareerPackageRepository.findById(id);
+        if(submittedCareerPackage.isEmpty()){
+            throw new ExistsException("Submitted Career Package does not exist");
+        }
+        return submittedCareerPackage.get().getEmployeeCareerPackage().getCareerPackage();
+    }
+
 }

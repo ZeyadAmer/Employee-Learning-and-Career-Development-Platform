@@ -4,6 +4,8 @@ import org.example.Enums.CareerPackageStatus;
 import org.example.Mappers.SubmittedCareerPackageDTO;
 import org.example.Services.SubmittedCareerPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,4 +59,23 @@ public class SubmittedCareerPackageController {
     public ResponseEntity<List<SubmittedCareerPackageDTO>> getAllSubmittedCareerPackages(){
         return ResponseEntity.ok(submittedCareerPackageService.getAllSubmittedCareerPackages());
     }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> downloadSubmittedCareerPackage(
+            @PathVariable int id,
+            @RequestParam("careerPackageName") String careerPackageName) {
+
+        byte[] careerPackageFile = submittedCareerPackageService.downloadSubmittedCareerPackage(id);
+        System.out.println("hiii");
+
+        if (careerPackageFile == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=\"" + careerPackageName + "\"");
+
+        return new ResponseEntity<>(careerPackageFile, headers, HttpStatus.OK);
+    }
+
 }

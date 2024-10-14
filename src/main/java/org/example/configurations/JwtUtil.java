@@ -14,10 +14,12 @@ public class JwtUtil {
     private final String SECRET_KEY = "your_secret_key"; // Change this to a secure key
     private final long EXPIRATION_TIME = 86400000; // 1 day
 
-    public String generateToken(String email, String departmentName, int userId) {
+    public String generateToken(String email, String departmentName,boolean isManager, int userId) {
         // Determine role based on department name
         String role = departmentName.equalsIgnoreCase("HR") ? "ROLE_ADMIN" : "ROLE_USER";
-
+        if(role.equals("ROLE_USER") && isManager){
+            role = "ROLE_MANAGER";
+        }
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
         claims.put("userId", userId);  // Add userId as an int to the token

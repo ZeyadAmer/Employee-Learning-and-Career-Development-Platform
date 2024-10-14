@@ -25,7 +25,7 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         User user = userService.getUserID(loginRequest.getEmail(), loginRequest.getPassword());
 
-        String token = jwtUtil.generateToken(user.getEmail(),user.getTitle().getDepartment().getName(),user.getId());
+        String token = jwtUtil.generateToken(user.getEmail(),user.getTitle().getDepartment().getName(),user.getTitle().isManager(),user.getId());
         return ResponseEntity.ok("{\"token\":\"" + token + "\"}");
     }
     @GetMapping

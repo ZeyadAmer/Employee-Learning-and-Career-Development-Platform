@@ -2,12 +2,14 @@ package org.example.Services;
 
 import org.example.Classes.EmployeeCareerPackage;
 import org.example.Classes.SubmittedCareerPackage;
+import org.example.Enums.CareerPackageStatus;
 import org.example.Exceptions.ExistsException;
 import org.example.Mappers.SubmittedCareerPackageDTO;
 import org.example.Mappers.SubmittedCareerPackageMapper;
 import org.example.Repository.EmployeeCareerPackageRepository;
 import org.example.Repository.SubmittedCareerPackageRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,12 +45,28 @@ public class SubmittedCareerPackageService {
         submittedCareerPackageRepository.delete(submittedCareerPackage.get());
     }
 
+    public void updateSubmittedCareerPackage(int id, CareerPackageStatus careerPackageStatus){
+        Optional<SubmittedCareerPackage> submittedCareerPackage = submittedCareerPackageRepository.findById(id);
+        if(submittedCareerPackage.isEmpty()){
+            throw new ExistsException("Submitted Career Package does not exist");
+        }
+        SubmittedCareerPackage updateSubmittedCareerPackage = submittedCareerPackage.get();
+        updateSubmittedCareerPackage.setCareerPackageStatus(careerPackageStatus);
+        submittedCareerPackageRepository.save(updateSubmittedCareerPackage);
+    }
+
     public SubmittedCareerPackageDTO getSubmittedCareerPackage(int id){
         Optional<SubmittedCareerPackage> submittedCareerPackage = submittedCareerPackageRepository.findById(id);
         if(submittedCareerPackage.isEmpty()){
             throw new ExistsException("Submitted Career Package does not exist");
         }
         return submittedCareerPackageMapper.submittedCareerPackageToSubmittedCareerPackageDTO(submittedCareerPackage.get());
+    }
+
+    @Transactional
+    public List<SubmittedCareerPackageDTO> getAllEmployeeSubmittedCareerPackage(int employeeId){
+        Optional<List<SubmittedCareerPackage>> submittedCareerPackageDTOS = submittedCareerPackageRepository.findByEmployeeId(employeeId);
+        return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackageDTOS.get());
     }
 
     public List<SubmittedCareerPackageDTO> getAllSubmittedCareerPackages(){

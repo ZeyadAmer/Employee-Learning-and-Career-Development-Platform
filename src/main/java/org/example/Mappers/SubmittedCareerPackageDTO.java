@@ -12,6 +12,8 @@ public class SubmittedCareerPackageDTO {
     private int managerId; // from user DB
     private CareerPackageStatus careerPackageStatus;
 
+    public SubmittedCareerPackageDTO(){}
+
     public SubmittedCareerPackageDTO(int employeeId, EmployeeCareerPackageDTO employeeCareerPackage, int managerId, CareerPackageStatus careerPackageStatus) {
         this.employeeId = employeeId;
         this.employeeCareerPackage = employeeCareerPackage;

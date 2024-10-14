@@ -31,9 +31,11 @@ public class SubmittedCareerPackageController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateSubmittedCareerPackage(@PathVariable int id, @RequestBody CareerPackageStatus careerPackageStatus){
+    public ResponseEntity<String> updateSubmittedCareerPackage(@PathVariable int id, @RequestParam("careerPackageStatus") CareerPackageStatus careerPackageStatus){
+        System.out.println("STATUS RECEIVED: "+ careerPackageStatus);
         submittedCareerPackageService.updateSubmittedCareerPackage(id,careerPackageStatus);
-        return ResponseEntity.ok("Submiited Career Package Status updated");
+        String jsonResponse = String.format("{\"message\": \"%s\"}", "Submiited Career Package Status updated.");
+        return ResponseEntity.ok(jsonResponse);
     }
 
     @GetMapping("/{id}")
@@ -44,6 +46,11 @@ public class SubmittedCareerPackageController {
     @GetMapping("/employee/{employeeId}")
     public ResponseEntity<List<SubmittedCareerPackageDTO>> getAllEmployeeSubmittedCareerPackage(@PathVariable int employeeId){
         return ResponseEntity.ok(submittedCareerPackageService.getAllEmployeeSubmittedCareerPackage(employeeId));
+    }
+
+    @GetMapping("/manager/{managerId}")
+    public ResponseEntity<List<SubmittedCareerPackageDTO>> getAllManagerReceivedCareerPackage(@PathVariable int managerId){
+        return ResponseEntity.ok(submittedCareerPackageService.getAllManagerReceivedCareerPackage(managerId));
     }
 
     @GetMapping("/all")

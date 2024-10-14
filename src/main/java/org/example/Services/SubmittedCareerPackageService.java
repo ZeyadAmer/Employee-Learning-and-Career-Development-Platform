@@ -69,6 +69,12 @@ public class SubmittedCareerPackageService {
         return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackageDTOS.get());
     }
 
+    @Transactional
+    public List<SubmittedCareerPackageDTO> getAllManagerReceivedCareerPackage(int managerId){
+        Optional<List<SubmittedCareerPackage>> submittedCareerPackages = submittedCareerPackageRepository.findByManagerId(managerId);
+        return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackages.get());
+    }
+
     public List<SubmittedCareerPackageDTO> getAllSubmittedCareerPackages(){
         List<SubmittedCareerPackage> submittedCareerPackages = submittedCareerPackageRepository.findAll();
         return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackages);

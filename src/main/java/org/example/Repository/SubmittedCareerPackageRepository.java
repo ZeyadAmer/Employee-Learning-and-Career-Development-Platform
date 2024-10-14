@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface SubmittedCareerPackageRepository extends JpaRepository<SubmittedCareerPackage, Integer> {
     Optional<List<SubmittedCareerPackage>> findByEmployeeId(int employeeId);
+    Optional<List<SubmittedCareerPackage>> findByManagerId(int managerId);
 }

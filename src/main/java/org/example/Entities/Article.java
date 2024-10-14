@@ -23,12 +23,12 @@ public class Article {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "approval_status", nullable = false)
-    private ApprovalStatus approvalStatus;
+    private ApprovalStatus approvalStatus = ApprovalStatus.PENDING;
 
     @Column(length = 500)
     private String comment;
 
-    @Lob
+
     @Column(name = "document_data", nullable = false)
     private String documentData;
 
@@ -65,7 +65,10 @@ public class Article {
     public void setSubmissionDate(Date submissionDate) {
         this.submissionDate = submissionDate;
     }
-
+    @PrePersist
+    protected void onCreate() {
+        this.submissionDate = new Date(); // Set submissionDate to current date
+    }
     public ApprovalStatus getApprovalStatus() {
         return approvalStatus;
     }

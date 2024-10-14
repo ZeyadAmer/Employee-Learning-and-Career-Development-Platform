@@ -5,20 +5,34 @@ import java.util.Date;
 public class ArticleDTO {
     private int id;
     private String title;
-    private String content;
-    private String author;
+    private String documentData;
+    private int author;
     private String comment;
-    private Date date;
+    private Date submissionDate; // Keep the field name consistent
+
+    // Default constructor
     public ArticleDTO() {}
-    public ArticleDTO(int id, String title, String content, String author, String comment, Date date) {
-        this.id = id;
+
+    // Constructor for initializing with title, documentData, author, comment, and submissionDate
+    public ArticleDTO(String title, String documentData, int author, String comment, Date submissionDate) {
         this.title = title;
-        this.content = content;
+        this.documentData = documentData;
         this.author = author;
         this.comment = comment;
-        this.date = date;
+        this.submissionDate = submissionDate;
     }
 
+    // Constructor for initializing with id and other fields
+    public ArticleDTO(int id, String title, String documentData, int author, String comment, Date submissionDate) {
+        this.id = id;
+        this.title = title;
+        this.documentData = documentData;
+        this.author = author;
+        this.comment = comment;
+        this.submissionDate = submissionDate;
+    }
+
+    // Getters and Setters
     public String getTitle() {
         return title;
     }
@@ -35,19 +49,19 @@ public class ArticleDTO {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getDocumentData() {
+        return documentData;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDocumentData(String documentData) {
+        this.documentData = documentData;
     }
 
-    public String getAuthor() {
+    public int getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(int author) {
         this.author = author;
     }
 
@@ -59,11 +73,12 @@ public class ArticleDTO {
         this.comment = comment;
     }
 
-    public Date getDate() {
-        return date;
+    // Getter and Setter for submissionDate
+    public Date getSubmissionDate() {
+        return submissionDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setSubmissionDate(Date submissionDate) {
+        this.submissionDate = submissionDate;
     }
 }

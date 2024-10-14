@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/users/*").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/*").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.PUT, "/users/*").hasAuthority("ROLE_ADMIN")
-                .antMatchers(("/**")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .antMatchers(("/**")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER","ROLE_MANAGER")
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Use stateless session
 

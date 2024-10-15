@@ -48,9 +48,8 @@ public class SubmittedCareerPackageController {
     }
 
     @GetMapping("/employee/{employeeId}")
-    public ResponseEntity<Page<SubmittedCareerPackageDTO>> getAllEmployeeSubmittedCareerPackage(@PathVariable int employeeId, @RequestParam int page, @RequestParam int size){
-        Page<SubmittedCareerPackageDTO> packages = submittedCareerPackageService.getAllEmployeeSubmittedCareerPackage(employeeId, PageRequest.of(page, size));
-        return ResponseEntity.ok(packages);
+    public ResponseEntity<List<SubmittedCareerPackageDTO>> getAllEmployeeSubmittedCareerPackage(@PathVariable int employeeId){
+        return ResponseEntity.ok(submittedCareerPackageService.getAllEmployeeSubmittedCareerPackage(employeeId));
     }
 
 

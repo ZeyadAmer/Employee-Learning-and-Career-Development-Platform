@@ -67,10 +67,9 @@ public class SubmittedCareerPackageService {
     }
 
     @Transactional
-    public Page<SubmittedCareerPackageDTO> getAllEmployeeSubmittedCareerPackage(int employeeId, Pageable pageable){
-        Page<SubmittedCareerPackage> submittedCareerPackages = submittedCareerPackageRepository.findByEmployeeId(employeeId, pageable);
-        List<SubmittedCareerPackageDTO> submittedCareerPackageDTOS = submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackages.getContent());
-        return new PageImpl<>(submittedCareerPackageDTOS, pageable, submittedCareerPackages.getTotalElements());
+    public List<SubmittedCareerPackageDTO> getAllEmployeeSubmittedCareerPackage(int employeeId){
+        Optional<List<SubmittedCareerPackage>> submittedCareerPackageDTOS = submittedCareerPackageRepository.findByEmployeeId(employeeId);
+        return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackageDTOS.get());
     }
 
     @Transactional

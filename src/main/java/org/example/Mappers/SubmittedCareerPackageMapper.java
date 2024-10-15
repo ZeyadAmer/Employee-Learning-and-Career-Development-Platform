@@ -2,6 +2,7 @@ package org.example.Mappers;
 
 import org.example.Classes.SubmittedCareerPackage;
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 

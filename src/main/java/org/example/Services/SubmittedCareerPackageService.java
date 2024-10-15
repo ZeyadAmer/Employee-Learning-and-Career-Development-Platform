@@ -8,8 +8,11 @@ import org.example.Mappers.SubmittedCareerPackageDTO;
 import org.example.Mappers.SubmittedCareerPackageMapper;
 import org.example.Repository.EmployeeCareerPackageRepository;
 import org.example.Repository.SubmittedCareerPackageRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,9 +67,10 @@ public class SubmittedCareerPackageService {
     }
 
     @Transactional
-    public List<SubmittedCareerPackageDTO> getAllEmployeeSubmittedCareerPackage(int employeeId){
-        Optional<List<SubmittedCareerPackage>> submittedCareerPackageDTOS = submittedCareerPackageRepository.findByEmployeeId(employeeId);
-        return submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackageDTOS.get());
+    public Page<SubmittedCareerPackageDTO> getAllEmployeeSubmittedCareerPackage(int employeeId, Pageable pageable){
+        Page<SubmittedCareerPackage> submittedCareerPackages = submittedCareerPackageRepository.findByEmployeeId(employeeId, pageable);
+        List<SubmittedCareerPackageDTO> submittedCareerPackageDTOS = submittedCareerPackageMapper.submittedCareerPackageListToSubmittedCareerPackageDTOList(submittedCareerPackages.getContent());
+        return new PageImpl<>(submittedCareerPackageDTOS, pageable, submittedCareerPackages.getTotalElements());
     }
 
     @Transactional

@@ -3,6 +3,7 @@ package org.example.Classes;
 import org.example.Enums.CareerPackageStatus;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(
@@ -19,6 +20,8 @@ public class SubmittedCareerPackage {
     private EmployeeCareerPackage employeeCareerPackage; // fk one to one
     private int managerId; // from user DB
     private CareerPackageStatus careerPackageStatus; // enum
+    @OneToMany(mappedBy = "submittedCareerPackage")
+    private List<Comment> comments;
 
     public SubmittedCareerPackage(){}
 
@@ -67,5 +70,13 @@ public class SubmittedCareerPackage {
 
     public void setCareerPackageStatus(CareerPackageStatus careerPackageStatus) {
         this.careerPackageStatus = careerPackageStatus;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

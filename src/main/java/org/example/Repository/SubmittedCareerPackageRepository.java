@@ -13,5 +13,4 @@ import java.util.Optional;
 public interface SubmittedCareerPackageRepository extends JpaRepository<SubmittedCareerPackage, Integer> {
     Optional<List<SubmittedCareerPackage>> findByEmployeeId(int employeeId);
     Optional<List<SubmittedCareerPackage>> findByManagerId(int managerId);
-    Page<SubmittedCareerPackage> findByEmployeeId(int employeeId, Pageable pageable);
 }

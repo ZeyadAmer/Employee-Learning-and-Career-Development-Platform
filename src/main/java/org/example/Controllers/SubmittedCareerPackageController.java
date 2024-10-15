@@ -4,6 +4,8 @@ import org.example.Enums.CareerPackageStatus;
 import org.example.Mappers.SubmittedCareerPackageDTO;
 import org.example.Services.SubmittedCareerPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,9 +48,11 @@ public class SubmittedCareerPackageController {
     }
 
     @GetMapping("/employee/{employeeId}")
-    public ResponseEntity<List<SubmittedCareerPackageDTO>> getAllEmployeeSubmittedCareerPackage(@PathVariable int employeeId){
-        return ResponseEntity.ok(submittedCareerPackageService.getAllEmployeeSubmittedCareerPackage(employeeId));
+    public ResponseEntity<Page<SubmittedCareerPackageDTO>> getAllEmployeeSubmittedCareerPackage(@PathVariable int employeeId, @RequestParam int page, @RequestParam int size){
+        Page<SubmittedCareerPackageDTO> packages = submittedCareerPackageService.getAllEmployeeSubmittedCareerPackage(employeeId, PageRequest.of(page, size));
+        return ResponseEntity.ok(packages);
     }
+
 
     @GetMapping("/manager/{managerId}")
     public ResponseEntity<List<SubmittedCareerPackageDTO>> getAllManagerReceivedCareerPackage(@PathVariable int managerId){
@@ -66,7 +70,6 @@ public class SubmittedCareerPackageController {
             @RequestParam("careerPackageName") String careerPackageName) {
 
         byte[] careerPackageFile = submittedCareerPackageService.downloadSubmittedCareerPackage(id);
-        System.out.println("hiii");
 
         if (careerPackageFile == null) {
             return ResponseEntity.notFound().build();

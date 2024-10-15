@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200") // for CORS
 @RequestMapping("/comments")
 public class CommentController {
 
@@ -21,7 +22,8 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<String> createComment(@RequestBody CommentDTO commentDTO){
         commentService.createComment(commentDTO);
-        return ResponseEntity.ok("comment created");
+        String jsonResponse = String.format("{\"message\": \"%s\"}", "Comment created.");
+        return ResponseEntity.ok(jsonResponse);
     }
 
     @GetMapping("/{id}")

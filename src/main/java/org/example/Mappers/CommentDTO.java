@@ -6,11 +6,11 @@ public class CommentDTO {
 
     private int id;
     private String commentText;
-    private SubmittedCareerPackage submittedCareerPackage;
+    private SubmittedCareerPackageDTO submittedCareerPackage;
 
     public CommentDTO(){}
 
-    public CommentDTO(String commentText, SubmittedCareerPackage submittedCareerPackage) {
+    public CommentDTO(String commentText, SubmittedCareerPackageDTO submittedCareerPackage) {
         this.commentText = commentText;
         this.submittedCareerPackage = submittedCareerPackage;
     }
@@ -31,11 +31,11 @@ public class CommentDTO {
         this.id = id;
     }
 
-    public SubmittedCareerPackage getSubmittedCareerPackage() {
+    public SubmittedCareerPackageDTO getSubmittedCareerPackage() {
         return submittedCareerPackage;
     }
 
-    public void setSubmittedCareerPackage(SubmittedCareerPackage submittedCareerPackage) {
+    public void setSubmittedCareerPackage(SubmittedCareerPackageDTO submittedCareerPackage) {
         this.submittedCareerPackage = submittedCareerPackage;
     }
 }

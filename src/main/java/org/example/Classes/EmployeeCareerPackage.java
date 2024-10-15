@@ -1,5 +1,7 @@
 package org.example.Classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class EmployeeCareerPackage {
     @Lob // for large amount of data
     private byte[] careerPackage;
     @OneToOne(mappedBy = "employeeCareerPackage", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private SubmittedCareerPackage submittedCareerPackage;
     private String careerPackageName;
     private Date date;

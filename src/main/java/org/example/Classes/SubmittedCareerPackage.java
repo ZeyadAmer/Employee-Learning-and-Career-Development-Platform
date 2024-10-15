@@ -20,7 +20,7 @@ public class SubmittedCareerPackage {
     private EmployeeCareerPackage employeeCareerPackage; // fk one to one
     private int managerId; // from user DB
     private CareerPackageStatus careerPackageStatus; // enum
-    @OneToMany(mappedBy = "submittedCareerPackage")
+    @OneToMany(mappedBy = "submittedCareerPackage", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     public SubmittedCareerPackage(){}

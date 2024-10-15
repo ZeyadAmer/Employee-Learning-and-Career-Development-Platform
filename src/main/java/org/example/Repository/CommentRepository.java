@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
-    Optional<List<Comment>> findBySubmittedCareerPackage(SubmittedCareerPackage submittedCareerPackage);
+    List<Comment> findBySubmittedCareerPackage(SubmittedCareerPackage submittedCareerPackage);
 }

@@ -1,5 +1,7 @@
 package org.example.Services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Classes.Comment;
 import org.example.Classes.SubmittedCareerPackage;
 import org.example.Exceptions.ExistsException;
@@ -33,24 +35,28 @@ public class CommentService {
         }
         Optional<SubmittedCareerPackage> submittedCareerPackage = submittedCareerPackageRepository.findById(commentDTO.getSubmittedCareerPackage().getId());
         if(submittedCareerPackage.isEmpty()){
-            throw new ExistsException("Submiited Career Package does not exist.");
+            throw new ExistsException("Submitted Career Package does not exist.");
         }
 
         Comment comment = commentMapper.commentDTOToComment(commentDTO);
         comment.setSubmittedCareerPackage(submittedCareerPackage.get());
+        System.out.println("submited career package id: "+ comment.getSubmittedCareerPackage().getId());
         commentRepository.save(comment);
     }
 
-    public CommentDTO getComment(int id){
+    public CommentDTO getComment(int id) throws JsonProcessingException {
         Optional<Comment> comment = commentRepository.findById(id);
         if(comment.isEmpty()){
             throw new ExistsException("Comment does not exist.");
         }
+        System.out.println("Response DTO: " + new ObjectMapper().writeValueAsString(commentMapper.commentToCommentDTO(comment.get())));
         return commentMapper.commentToCommentDTO(comment.get());
     }
 
-    public List<CommentDTO> getAllComments(SubmittedCareerPackage submittedCareerPackage){
-        Optional<List<Comment>> comments = commentRepository.findBySubmittedCareerPackage(submittedCareerPackage);
-        return commentMapper.commentListToCommentDTO(comments.get());
+    public List<CommentDTO> getAllComments(int submittedCareerPackageId){
+        Optional<SubmittedCareerPackage> submittedCareerPackage = submittedCareerPackageRepository.findById(submittedCareerPackageId);
+        List<Comment> comments = commentRepository.findBySubmittedCareerPackage(submittedCareerPackage.get());
+        System.out.println("Response size: " + comments.size());
+        return commentMapper.commentListToCommentDTO(comments);
     }
 }

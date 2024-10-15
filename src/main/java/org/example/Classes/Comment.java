@@ -14,7 +14,7 @@ public class Comment {
     private String commentText;
 
     @ManyToOne
-    @JoinColumn(name = "sumbitted_career_package_id")
+    @JoinColumn(name = "submitted_career_package_id", nullable = false)
     private SubmittedCareerPackage submittedCareerPackage;
 
     public Comment(){}

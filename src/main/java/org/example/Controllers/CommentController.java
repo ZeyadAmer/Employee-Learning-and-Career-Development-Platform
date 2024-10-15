@@ -1,5 +1,6 @@
 package org.example.Controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.example.Classes.SubmittedCareerPackage;
 import org.example.Mappers.CommentDTO;
 import org.example.Mappers.SubmittedCareerPackageDTO;
@@ -17,19 +18,19 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<String> createComment(@RequestBody CommentDTO commentDTO){
         commentService.createComment(commentDTO);
         return ResponseEntity.ok("comment created");
     }
 
-    @GetMapping("/comment/{id}")
-    public ResponseEntity<CommentDTO> getComment(@PathVariable int id){
+    @GetMapping("/{id}")
+    public ResponseEntity<CommentDTO> getComment(@PathVariable int id) throws JsonProcessingException {
         return ResponseEntity.ok(commentService.getComment(id));
     }
 
-    @GetMapping("/comments")
-    public ResponseEntity<List<CommentDTO>> getAllComments(@RequestBody SubmittedCareerPackage submittedCareerPackage){
-        return ResponseEntity.ok(commentService.getAllComments(submittedCareerPackage));
+    @GetMapping("/all/{submittedCareerPackageId}")
+    public ResponseEntity<List<CommentDTO>> getAllComments(@PathVariable int submittedCareerPackageId){
+        return ResponseEntity.ok(commentService.getAllComments(submittedCareerPackageId));
     }
 }

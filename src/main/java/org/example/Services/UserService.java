@@ -32,8 +32,9 @@ public class UserService {
         }
         User user = userRepository.findById(id).get();
         return userMapper.userToUserDTO(user);
-
     }
+
+
     public User getUserID(String email, String password){
         if(userRepository.findByEmail(email).isEmpty()){
             throw new ExistsException("User does not exists");

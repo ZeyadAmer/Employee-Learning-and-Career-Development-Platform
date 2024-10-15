@@ -34,6 +34,7 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
+
     @GetMapping
     public ResponseEntity<UserDTO> getUser(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
@@ -41,6 +42,15 @@ public class UserController {
         int id = jwtUtil.extractUserId(token);
         return ResponseEntity.ok(userService.getUser(id));
     }
+
+    @GetMapping("/id")
+    public ResponseEntity<Integer> getUserId(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        String token = authorizationHeader.substring(7);
+        int id = jwtUtil.extractUserId(token);
+        return ResponseEntity.ok(id);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable int id) {
         return ResponseEntity.ok(userService.getUser(id));

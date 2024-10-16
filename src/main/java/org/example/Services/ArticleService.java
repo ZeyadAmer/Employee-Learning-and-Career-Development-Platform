@@ -22,14 +22,14 @@ public class ArticleService {
         this.articleMapper = articleMapper;
     }
     public List<ArticleDTO> getAllArticlesApproved(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size); // Create pagination object
+        Pageable pageable = PageRequest.of(page, size);
         Page<Article> articlePage = articleRepository.findAllTitleApproved(pageable);
-        return articleMapper.articlesToArticleDTOs(articlePage.getContent()); // Get paginated content
+        return articleMapper.articlesToArticleDTOs(articlePage.getContent());
     }
     public List<ArticleDTO> getAllArticlesPending(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size); // Create pagination object
+        Pageable pageable = PageRequest.of(page, size);
         Page<Article> articlePage = articleRepository.findAllTitlePending(pageable);
-        return articleMapper.articlesToArticleDTOs(articlePage.getContent()); // Get paginated content
+        return articleMapper.articlesToArticleDTOs(articlePage.getContent());
     }
     public void createArticle(ArticleDTO articleDTO) {
         Article article = articleMapper.articleDTOToArticle(articleDTO);

@@ -10,16 +10,20 @@ import org.example.repository.CareerPackageTemplateRepository;
 import org.example.repository.EmployeeCareerPackageRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@ExtendWith(MockitoExtension.class)
 public class EmployeeCareerPackageServiceTest {
 
     @Mock
@@ -31,10 +35,6 @@ public class EmployeeCareerPackageServiceTest {
     @InjectMocks
     EmployeeCareerPackageService employeeCareerPackageService;
 
-    @BeforeEach
-    public void setUp(){
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     public void testCreateEmployeeCareerPackage_Success(){
@@ -118,7 +118,7 @@ public class EmployeeCareerPackageServiceTest {
         EmployeeCareerPackage employeeCareerPackage = new EmployeeCareerPackage();
         employeeCareerPackage.setId(1);
         CareerPackageTemplate careerPackageTemplate = new CareerPackageTemplate();
-        careerPackageTemplate.setTitle("Test1");
+        careerPackageTemplate.setTitle("Test");
         employeeCareerPackage.setCareerPackageTemplate(careerPackageTemplate);
         Mockito.when(employeeCareerPackageRepository.findById(1)).thenReturn(Optional.of(employeeCareerPackage));
         Mockito.when(careerPackageTemplateRepository.findByTitle("Test")).thenReturn(Optional.empty());

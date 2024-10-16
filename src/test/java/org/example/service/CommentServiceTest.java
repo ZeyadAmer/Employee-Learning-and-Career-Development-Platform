@@ -11,16 +11,20 @@ import org.example.repository.CommentRepository;
 import org.example.repository.SubmittedCareerPackageRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@ExtendWith(MockitoExtension.class)
 public class CommentServiceTest {
 
     @Mock
@@ -31,11 +35,6 @@ public class CommentServiceTest {
     SubmittedCareerPackageRepository submittedCareerPackageRepository;
     @InjectMocks
     CommentService commentService;
-
-    @BeforeEach
-    public void setUp(){
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     public void testCreateComment_Success() {
@@ -74,7 +73,7 @@ public class CommentServiceTest {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(1);
         SubmittedCareerPackageDTO submittedCareerPackageDTO = new SubmittedCareerPackageDTO();
-        submittedCareerPackageDTO.setId(2);
+        submittedCareerPackageDTO.setId(1);
         commentDTO.setSubmittedCareerPackage(submittedCareerPackageDTO);
         Mockito.when(commentRepository.findById(1)).thenReturn(Optional.empty());
         Mockito.when(submittedCareerPackageRepository.findById(1)).thenReturn(Optional.empty());

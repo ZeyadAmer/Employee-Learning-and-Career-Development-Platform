@@ -28,6 +28,9 @@ public class SubmittedCareerPackageService {
     }
 
     public void createSubmittedCareerPackage(SubmittedCareerPackageDTO submittedCareerPackageDTO){
+        if(submittedCareerPackageRepository.findById(submittedCareerPackageDTO.getId()).isPresent()){
+            throw new ExistsException("Submitted Career Package already exists.");
+        }
         Optional<EmployeeCareerPackage> employeeCareerPackage = employeeCareerPackageRepository.findById(submittedCareerPackageDTO.getEmployeeCareerPackage().getId());
         if(employeeCareerPackage.isEmpty()){
             throw new ExistsException("Employee Career Package does not exist");

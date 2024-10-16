@@ -24,13 +24,15 @@ public class CareerPackageTemplateController {
         byte[] careerPackage = file.getBytes();
         CareerPackageTemplateDTO careerPackageTemplateDTO = new CareerPackageTemplateDTO(title,careerPackage);
         careerPackageTemplateService.createCareerPackageTemplate(careerPackageTemplateDTO);
-        return ResponseEntity.ok("Career Package Template created.");
+        String jsonResponse = String.format("{\"message\": \"%s\"}", "Career Package Template created.");
+        return ResponseEntity.ok(jsonResponse);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteCareerPackageTemplate(@RequestBody String title){
         careerPackageTemplateService.deleteCareerPackageTemplate(title);
-        return ResponseEntity.ok("Career Package Template deleted.");
+        String jsonResponse = String.format("{\"message\": \"%s\"}", "Career Package Template deleted.");
+        return ResponseEntity.ok(jsonResponse);
     }
 
     @PutMapping

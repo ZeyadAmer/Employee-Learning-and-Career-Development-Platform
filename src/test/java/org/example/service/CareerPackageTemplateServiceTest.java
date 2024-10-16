@@ -7,16 +7,20 @@ import org.example.mapper.CareerPackageTemplateMapper;
 import org.example.repository.CareerPackageTemplateRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@ExtendWith(MockitoExtension.class)
 public class CareerPackageTemplateServiceTest {
 
     @Mock
@@ -25,11 +29,6 @@ public class CareerPackageTemplateServiceTest {
     CareerPackageTemplateMapper careerPackageTemplateMapper;
     @InjectMocks
     CareerPackageTemplateService careerPackageTemplateService;
-
-    @BeforeEach
-    public void setUp(){
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     public void testCreateCareerPackageTemplate_Success(){
@@ -78,8 +77,10 @@ public class CareerPackageTemplateServiceTest {
 
     @Test
     public void testUpdateCareerPackageTemplate_NotFound(){
+        CareerPackageTemplateDTO careerPackageTemplateDTO = new CareerPackageTemplateDTO();
+        careerPackageTemplateDTO.setTitle("Test");
         Mockito.when(careerPackageTemplateRepository.findByTitle("Test")).thenReturn(Optional.empty());
-        assertThrows(ExistsException.class, () -> careerPackageTemplateService.updateCareerPackageTemplate(new CareerPackageTemplateDTO()));
+        assertThrows(ExistsException.class, () -> careerPackageTemplateService.updateCareerPackageTemplate(careerPackageTemplateDTO));
     }
 
     @Test

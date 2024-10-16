@@ -28,19 +28,19 @@ public class UserScoresController {
         int id = jwtUtil.extractUserId(token);
         UserScoresDTO userScoresDTO = new UserScoresDTO(id, score);
         userScoresService.createUserScore(userScoresDTO);
-        return ResponseEntity.ok("User Score created.");
+        return ResponseEntity.ok("{\"response\":\"" + "User Score created." + "\"}");
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteUserScore(@RequestBody int id){
         userScoresService.deleteUserScore(id);
-        return ResponseEntity.ok("User Score deleted.");
+        return ResponseEntity.ok("{\"response\":\"" + "User Score deleted." + "\"}");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUserScore(@PathVariable int id, @RequestBody int newScore){
         userScoresService.updateUserScore(id, newScore);
-        return ResponseEntity.ok("User Score updated");
+        return ResponseEntity.ok("{\"response\":\"" + "User Score updated." + "\"}");
     }
 
     @GetMapping("/{id}")
@@ -51,5 +51,10 @@ public class UserScoresController {
     @GetMapping("/all")
     public ResponseEntity<List<UserScoresDTO>> getAllUserScores(){
         return ResponseEntity.ok(userScoresService.getAllUserScores());
+    }
+    @PutMapping("/add")
+    public ResponseEntity<String> addUserScore(@RequestParam int userId, @RequestParam int score){
+        userScoresService.addUserScore(userId, score);
+        return ResponseEntity.ok("{\"response\":\"" + "User Score added." + "\"}");
     }
 }

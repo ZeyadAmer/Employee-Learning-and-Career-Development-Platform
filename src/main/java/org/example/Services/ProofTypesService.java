@@ -43,7 +43,7 @@ public class ProofTypesService {
         }
 
         ProofTypes updatedProofType = proofType.get();
-        updatedProofType.setProof_type(newName);
+        updatedProofType.setProofType(newName);
         proofTypesRepository.save(updatedProofType);
     }
 

@@ -11,6 +11,7 @@ public class LearningTypes {
             strategy = GenerationType.IDENTITY
     )
     private int id;
+    @Column(name = "learning_type", nullable = false)
     private String learningType;
     private int baseScore;
     @OneToMany(mappedBy = "learningType", cascade = CascadeType.ALL)
@@ -25,13 +26,14 @@ public class LearningTypes {
         this.id = id;
     }
 
-    public String getLearning_type() {
+    public String getLearningType() {
         return learningType;
     }
 
-    public void setLearning_type(String learning_type) {
-        this.learningType = learning_type;
+    public void setLearningType(String learningType) {
+        this.learningType = learningType;
     }
+
 
     public int getBaseScore() {
         return baseScore;

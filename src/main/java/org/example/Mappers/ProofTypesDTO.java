@@ -2,20 +2,22 @@ package org.example.Mappers;
 
 public class ProofTypesDTO {
     private int id;
-    private String proofType;
+    private String proofType; // Change to camelCase to match Java conventions
 
-    public ProofTypesDTO(){}
+    // Constructor
+    public ProofTypesDTO() {}
 
-    public ProofTypesDTO(String proofType){
-        this.proofType = proofType;
+    public ProofTypesDTO(String proofType) {
+        this.proofType = proofType; // Match variable name
     }
 
+    // Getters and Setters
     public String getProofType() {
-        return proofType;
+        return proofType; // Use updated field name
     }
 
     public void setProofType(String proofType) {
-        this.proofType = proofType;
+        this.proofType = proofType; // Use updated field name
     }
 
     public int getId() {

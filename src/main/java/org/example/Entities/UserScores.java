@@ -12,6 +12,7 @@ public class UserScores {
     private int id; // userId from UsersDB
     private int score;
 
+
     public int getId() {
         return id;
     }

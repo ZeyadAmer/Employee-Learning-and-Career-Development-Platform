@@ -45,7 +45,7 @@ public class LearningSubjectsController {
         return ResponseEntity.ok(learningSubjectsService.getLearningSubject(subject));
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<LearningSubjectsDTO>> getAllLearningSubjects(){
         return ResponseEntity.ok(learningSubjectsService.getAllLearningSubjects());
     }

@@ -10,7 +10,7 @@ public class UserLearning {
         @GeneratedValue(strategy = GenerationType.AUTO)
         private int id;
 
-        @Column(nullable = false)
+        @Column(name = "user_id", nullable = false)
         private int userId; // reference userid in UsersDB
 
         @ManyToOne
@@ -24,14 +24,15 @@ public class UserLearning {
         private ProofTypes proofType;
 
         @ManyToOne
-        @JoinColumn(name = "booster_id", nullable = false)
+        @JoinColumn(name = "booster_id")
         private Booster booster;
 
         @Temporal(TemporalType.DATE)
         private Date date;
 
         @Enumerated(EnumType.STRING)
-        private ApprovalStatus approvalStatus;
+        @Column(name = "approval_status", nullable = false)
+        private ApprovalStatus approvalStatus = ApprovalStatus.PENDING;
 
         private String comment;
 
@@ -41,11 +42,20 @@ public class UserLearning {
 
         public UserLearning(){}
 
-        public UserLearning(String proof, Date date, ApprovalStatus approvalStatus, String comment){
+        public UserLearning(String proof, Date date, ApprovalStatus approvalStatus, String comment) {
                 this.proof = proof;
                 this.date = date;
                 this.approvalStatus = approvalStatus;
                 this.comment = comment;
+        }
+        @PrePersist
+        protected void onCreate() {
+                if (this.date == null) {
+                        this.date = new Date(); // Initialize date with the current date
+                }
+                if (this.approvalStatus == null) {
+                        this.approvalStatus = ApprovalStatus.PENDING; // Ensure default approval is PENDING
+                }
         }
 
         public int getId() {

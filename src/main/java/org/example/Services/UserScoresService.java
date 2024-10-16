@@ -58,4 +58,18 @@ public class UserScoresService {
         List<UserScores> userScores = userScoresRepository.findAllByOrderByScoreDesc();
         return userScoresMapper.userScoresListToUserScoresDTOsList(userScores);
     }
+    public void addUserScore(int userID, int score){
+        Optional<UserScores> userScore = userScoresRepository.findById(userID);
+        if(userScore.isEmpty()){
+            UserScores newUserScore = new UserScores();
+            newUserScore.setId(userID);
+            newUserScore.setScore(score);
+            userScoresRepository.save(newUserScore);
+        }else{
+            int updatedUserScore = userScore.get().getScore() + score;
+            userScore.get().setScore(updatedUserScore);
+            userScoresRepository.save(userScore.get());
+        }
+
+    }
 }

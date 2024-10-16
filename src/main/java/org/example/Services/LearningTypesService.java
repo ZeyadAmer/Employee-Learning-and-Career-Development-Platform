@@ -42,7 +42,7 @@ public class LearningTypesService {
             throw new ExistsException("Learning Type does not exist");
         }
         LearningTypes updatedLearningType = learningType.get();
-        updatedLearningType.setLearning_type(newName);
+        updatedLearningType.setLearningType(newName);
         learningTypesRepository.save(updatedLearningType);
     }
 

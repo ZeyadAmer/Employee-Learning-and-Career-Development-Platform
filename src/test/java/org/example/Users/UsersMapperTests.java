@@ -30,9 +30,7 @@ public class UsersMapperTests {
         user.setFirstName("John");
         user.setLastName("Doe");
         user.setEmail("john.doe@example.com");
-
         UserDTO userDTO = userMapper.userToUserDTO(user);
-
         assertEquals(user.getFirstName(), userDTO.getFirstName());
         assertEquals(user.getLastName(), userDTO.getLastName());
         assertEquals(user.getEmail(), userDTO.getEmail());

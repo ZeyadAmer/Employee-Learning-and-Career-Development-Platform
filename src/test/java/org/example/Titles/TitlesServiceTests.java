@@ -10,10 +10,12 @@ import org.example.Repositories.TitleRepository;
 import org.example.Services.TitleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@ExtendWith(MockitoExtension.class)
 public class TitlesServiceTests {
     @Mock
     TitleRepository titleRepository;
@@ -32,10 +35,7 @@ public class TitlesServiceTests {
     @InjectMocks
     TitleService titleService;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+
     @Test
     public void testGetAllTitles() {
         Title title = new Title();
@@ -70,9 +70,6 @@ public class TitlesServiceTests {
     @Test
     public void testUpdateTitleDepartment_TitleNotFound(){
         Mockito.when(titleRepository.findByName("title 1")).thenReturn(Optional.empty());
-        Department department = new Department();
-        department.setName("dept 1");
-        Mockito.when(departmentRepository.findByName("dept 1")).thenReturn(Optional.of(department));
         assertThrows(ExistsException.class,()->titleService.updateTitleDepartment("title 1","dept 1"));
         Mockito.verify(titleRepository, Mockito.times(1)).findByName("title 1");
     }
@@ -127,12 +124,9 @@ public class TitlesServiceTests {
     }
     @Test
     public void testCreateTitle_DepartmentDoesntExist(){
-        Title title = new Title();
-        title.setName("title 1");
         TitleDTO titleDTO = new TitleDTO("title 1",new DepartmentDTO(),true);
         titleDTO.getDepartment().setName("dept 1");
         Mockito.when(titleRepository.findByName("title 1")).thenReturn(Optional.empty());
-        Mockito.when(titleMapper.titleDTOToTitle(titleDTO)).thenReturn(title);
         Mockito.when(departmentRepository.findByName("dept 1")).thenReturn(Optional.empty());
         assertThrows(ExistsException.class,()->titleService.createTitle(titleDTO));
     }

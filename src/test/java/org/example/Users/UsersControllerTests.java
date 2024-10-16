@@ -37,10 +37,7 @@ public class UsersControllerTests {
     @InjectMocks
     private UserController userController;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+
 
     @Test
     public void testCreateUser() {
@@ -59,9 +56,7 @@ public class UsersControllerTests {
     @Test
     public void testDeleteUser() {
         String email = "user@example.com";
-
         ResponseEntity<String> response = userController.deleteUser(email);
-
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("User Deleted", response.getBody());
         verify(userService, times(1)).deleteUser(email);
@@ -72,9 +67,7 @@ public class UsersControllerTests {
         UserDTO userDTO = new UserDTO();
         List<UserDTO> users = Arrays.asList(userDTO);
         when(userService.getAllUsers()).thenReturn(users);
-
         ResponseEntity<List<UserDTO>> response = userController.getAllUsers();
-
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(1, response.getBody().size());
         verify(userService, times(1)).getAllUsers();

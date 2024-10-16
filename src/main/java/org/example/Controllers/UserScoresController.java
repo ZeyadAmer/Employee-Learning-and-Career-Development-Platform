@@ -31,6 +31,7 @@ public class UserScoresController {
         return ResponseEntity.ok("{\"response\":\"" + "User Score created." + "\"}");
     }
 
+
     @DeleteMapping
     public ResponseEntity<String> deleteUserScore(@RequestBody int id){
         userScoresService.deleteUserScore(id);

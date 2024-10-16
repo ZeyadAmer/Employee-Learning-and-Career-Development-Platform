@@ -13,8 +13,8 @@ import java.util.Optional;
 @Service
 public class LearningTypesService {
 
-    private LearningTypesRepository learningTypesRepository;
-    private LearningTypesMapper learningTypesMapper;
+    private final LearningTypesRepository learningTypesRepository;
+    private final LearningTypesMapper learningTypesMapper;
 
     public LearningTypesService(LearningTypesRepository learningTypesRepository, LearningTypesMapper learningTypesMapper){
         this.learningTypesMapper = learningTypesMapper;

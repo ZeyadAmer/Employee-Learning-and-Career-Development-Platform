@@ -22,8 +22,8 @@ import java.util.Optional;
 @Service
 public class BoosterFilterService {
 
-    private BoosterFilterMapper boosterFilterMapper;
-    private BoosterFilterRepository boosterFilterRepository;
+    private final BoosterFilterMapper boosterFilterMapper;
+    private final BoosterFilterRepository boosterFilterRepository;
     private BoosterRepository boosterRepository;
     private LearningTypesRepository learningTypesRepository;
 

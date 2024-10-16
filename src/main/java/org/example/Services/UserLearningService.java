@@ -21,10 +21,10 @@ import java.util.Optional;
 @Service
 public class UserLearningService {
 
-    private UserLearningRepository userLearningRepository;
-    private UserLearningMapper userLearningMapper;
-    private LearningTypesRepository learningTypesRepository;
-    private ProofTypesRepository proofTypesRepository;
+    private final UserLearningRepository userLearningRepository;
+    private final UserLearningMapper userLearningMapper;
+    private final LearningTypesRepository learningTypesRepository;
+    private final ProofTypesRepository proofTypesRepository;
 
     public UserLearningService(UserLearningRepository userLearningRepository, UserLearningMapper userLearningMapper,
                                LearningTypesRepository learningTypesRepository, ProofTypesRepository proofTypesRepository){

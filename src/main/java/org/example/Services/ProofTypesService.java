@@ -13,8 +13,8 @@ import java.util.Optional;
 @Service
 public class ProofTypesService {
 
-    private ProofTypesMapper proofTypesMapper;
-    private ProofTypesRepository proofTypesRepository;
+    private final ProofTypesMapper proofTypesMapper;
+    private final ProofTypesRepository proofTypesRepository;
 
     public ProofTypesService(ProofTypesMapper proofTypesMapper, ProofTypesRepository proofTypesRepository){
         this.proofTypesMapper = proofTypesMapper;

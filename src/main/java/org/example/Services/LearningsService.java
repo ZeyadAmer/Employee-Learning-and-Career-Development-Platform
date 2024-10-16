@@ -15,8 +15,8 @@ import java.util.Optional;
 @Service
 public class LearningsService {
 
-    private LearningsRepository learningsRepository;
-    private LearningsMapper learningsMapper;
+    private final LearningsRepository learningsRepository;
+    private final LearningsMapper learningsMapper;
 
     public  LearningsService(LearningsRepository learningsRepository, LearningsMapper learningsMapper){
         this.learningsMapper = learningsMapper;

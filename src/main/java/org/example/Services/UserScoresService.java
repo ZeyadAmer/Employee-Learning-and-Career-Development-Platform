@@ -13,8 +13,8 @@ import java.util.Optional;
 @Service
 public class UserScoresService {
 
-    private UserScoresMapper userScoresMapper;
-    private UserScoresRepository userScoresRepository;
+    private final UserScoresMapper userScoresMapper;
+    private final UserScoresRepository userScoresRepository;
 
     public UserScoresService(UserScoresMapper userScoresMapper, UserScoresRepository userScoresRepository){
         this.userScoresMapper = userScoresMapper;

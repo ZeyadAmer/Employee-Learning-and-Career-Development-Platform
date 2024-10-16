@@ -13,8 +13,8 @@ import java.util.Optional;
 @Service
 public class ScoreboardLevelsService {
 
-    private ScoreboardLevelsMapper scoreboardLevelsMapper;
-    private ScoreboardLevelsRepository scoreboardLevelsRepository;
+    private final ScoreboardLevelsMapper scoreboardLevelsMapper;
+    private final ScoreboardLevelsRepository scoreboardLevelsRepository;
 
     public ScoreboardLevelsService(ScoreboardLevelsMapper scoreboardLevelsMapper,ScoreboardLevelsRepository scoreboardLevelsRepository){
         this.scoreboardLevelsMapper = scoreboardLevelsMapper;

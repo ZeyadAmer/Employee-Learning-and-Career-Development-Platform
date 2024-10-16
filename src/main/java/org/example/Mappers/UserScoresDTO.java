@@ -26,4 +26,6 @@ public class UserScoresDTO {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }

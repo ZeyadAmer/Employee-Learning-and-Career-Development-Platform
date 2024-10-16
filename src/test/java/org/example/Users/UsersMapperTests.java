@@ -5,15 +5,18 @@ import org.example.Mappers.UserDTO;
 import org.example.Mappers.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class UsersMapperTests {
+
     private UserMapper userMapper;
 
     @BeforeEach

@@ -5,8 +5,12 @@ import org.example.Entities.Title;
 import org.example.Mappers.DepartmentDTO;
 import org.example.Mappers.TitleDTO;
 import org.example.Mappers.TitleMapper;
+import org.example.Mappers.UserMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,11 +19,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class TitlesMapperTests {
-    @Autowired
     TitleMapper titleMapper;
-
+    @BeforeEach
+    public void setUp() {
+        titleMapper = Mappers.getMapper(TitleMapper.class);
+    }
 
 
     @Test

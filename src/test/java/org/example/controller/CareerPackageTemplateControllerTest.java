@@ -11,16 +11,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.multipart.MultipartFile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 
@@ -29,10 +24,6 @@ public class CareerPackageTemplateControllerTest {
 
     @Mock
     private CareerPackageTemplateService careerPackageTemplateService;
-    @Mock
-    private HttpServletRequest request;
-    @Mock
-    private JwtUtil jwtUtil;
     @InjectMocks
     CareerPackageTemplateController careerPackageTemplateController;
 
@@ -67,9 +58,44 @@ public class CareerPackageTemplateControllerTest {
         assertEquals("{\"message\": \"Career Package Template deleted.\"}", response.getBody());
 
         Mockito.verify(careerPackageTemplateService, Mockito.times(1))
-                .createCareerPackageTemplate(Mockito.any(CareerPackageTemplateDTO.class));
+                .deleteCareerPackageTemplate("");
     }
 
+    @Test
+    public void testUpdateCareerPackageTemplate(){
+        CareerPackageTemplateDTO careerPackageTemplateDTO = new CareerPackageTemplateDTO();
+        careerPackageTemplateDTO.setTitle("Test");
+        ResponseEntity<String> response = careerPackageTemplateController.updateCareerPackageTemplate(careerPackageTemplateDTO);
 
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals("{\"message\": \"Career Package Template updated.\"}", response.getBody());
 
+        Mockito.verify(careerPackageTemplateService, Mockito.times(1))
+                .updateCareerPackageTemplate(careerPackageTemplateDTO);
+    }
+
+    @Test
+    public void testGetCareerPackageTemplate(){
+        ResponseEntity<CareerPackageTemplateDTO> response = careerPackageTemplateController.getCareerPackageTemplate("");
+
+        assertEquals(200, response.getStatusCodeValue());
+
+        Mockito.verify(careerPackageTemplateService, Mockito.times(1))
+                .getCareerPackageTemplate("");
+    }
+
+    @Test
+    public void testDownloadCareerPackageTemplate() {
+        byte[] mockFile = "".getBytes();  // Mock byte array
+
+        Mockito.when(careerPackageTemplateService.downloadCareerPackageTemplate(""))
+                .thenReturn(mockFile);
+
+        ResponseEntity<byte[]> response = careerPackageTemplateController.downloadCareerPackageTemplate("");
+
+        assertEquals(200, response.getStatusCodeValue());
+
+        Mockito.verify(careerPackageTemplateService, Mockito.times(1))
+                .downloadCareerPackageTemplate("");
+    }
 }

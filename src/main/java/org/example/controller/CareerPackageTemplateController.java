@@ -38,7 +38,8 @@ public class CareerPackageTemplateController {
     @PutMapping
     public ResponseEntity<String> updateCareerPackageTemplate(@RequestBody CareerPackageTemplateDTO careerPackageTemplateDTO){
         careerPackageTemplateService.updateCareerPackageTemplate(careerPackageTemplateDTO);
-        return ResponseEntity.ok("Career Package Template updated.");
+        String jsonResponse = String.format("{\"message\": \"%s\"}", "Career Package Template updated.");
+        return ResponseEntity.ok(jsonResponse);
     }
 
     @GetMapping("/{title}")

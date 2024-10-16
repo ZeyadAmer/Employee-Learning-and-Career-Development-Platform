@@ -32,7 +32,8 @@ public class EmployeeCareerPackageController {
     @DeleteMapping
     public ResponseEntity<String> deleteEmployeeCareerPackage(@RequestBody int id){
         employeeCareerPackageService.deleteEmployeeCareerPackage(id);
-        return ResponseEntity.ok("Employee Career Package deleted.");
+        String jsonResponse = String.format("{\"message\": \"%s\"}", "Employee Career Package deleted.");
+        return ResponseEntity.ok(jsonResponse);
     }
 
     @PutMapping

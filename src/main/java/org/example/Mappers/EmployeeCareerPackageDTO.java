@@ -9,14 +9,16 @@ public class EmployeeCareerPackageDTO {
     private byte[] careerPackage;
     private String careerPackageName;
     private Date date;
+    private CareerPackageTemplateDTO careerPackageTemplateDTO;
 
     public EmployeeCareerPackageDTO(){}
 
-    public EmployeeCareerPackageDTO(int employeeId, byte[] careerPackage, String careerPackageName, Date date) {
+    public EmployeeCareerPackageDTO(int employeeId, byte[] careerPackage, String careerPackageName, Date date, CareerPackageTemplateDTO careerPackageTemplateDTO) {
         this.employeeId = employeeId;
         this.careerPackage = careerPackage;
         this.careerPackageName = careerPackageName;
         this.date = date;
+        this.careerPackageTemplateDTO = careerPackageTemplateDTO;
     }
 
     public int getId() {
@@ -57,5 +59,13 @@ public class EmployeeCareerPackageDTO {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public CareerPackageTemplateDTO getCareerPackageTemplateDTO() {
+        return careerPackageTemplateDTO;
+    }
+
+    public void setCareerPackageTemplateDTO(CareerPackageTemplateDTO careerPackageTemplateDTO) {
+        this.careerPackageTemplateDTO = careerPackageTemplateDTO;
     }
 }

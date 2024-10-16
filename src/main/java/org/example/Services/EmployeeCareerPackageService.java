@@ -1,9 +1,11 @@
 package org.example.Services;
 
+import org.example.Classes.CareerPackageTemplate;
 import org.example.Classes.EmployeeCareerPackage;
 import org.example.Exceptions.ExistsException;
 import org.example.Mappers.EmployeeCareerPackageDTO;
 import org.example.Mappers.EmployeeCareerPackageMapper;
+import org.example.Repository.CareerPackageTemplateRepository;
 import org.example.Repository.EmployeeCareerPackageRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +18,21 @@ public class EmployeeCareerPackageService {
 
     private final EmployeeCareerPackageMapper employeeCareerPackageMapper;
     private final EmployeeCareerPackageRepository employeeCareerPackageRepository;
+    private final CareerPackageTemplateRepository careerPackageTemplateRepository;
 
-    public EmployeeCareerPackageService(EmployeeCareerPackageMapper employeeCareerPackageMapper, EmployeeCareerPackageRepository employeeCareerPackageRepository) {
+    public EmployeeCareerPackageService(EmployeeCareerPackageMapper employeeCareerPackageMapper, EmployeeCareerPackageRepository employeeCareerPackageRepository, CareerPackageTemplateRepository careerPackageTemplateRepository) {
         this.employeeCareerPackageMapper = employeeCareerPackageMapper;
         this.employeeCareerPackageRepository = employeeCareerPackageRepository;
+        this.careerPackageTemplateRepository = careerPackageTemplateRepository;
     }
 
     public void createEmployeeCareerPackage(EmployeeCareerPackageDTO employeeCareerPackageDTO){
         if(employeeCareerPackageRepository.findById(employeeCareerPackageDTO.getId()).isPresent()){
             throw new ExistsException("Employee Career Package already exists");
+        }
+        Optional<CareerPackageTemplate> careerPackageTemplate = careerPackageTemplateRepository.findByTitle(employeeCareerPackageDTO.getCareerPackageTemplateDTO().getTitle());
+        if(careerPackageTemplate.isEmpty()){
+            throw new ExistsException("Career Package Template does not exist.");
         }
         System.out.println("employee id: "+ employeeCareerPackageDTO.getEmployeeId());
         System.out.println("career package: "+employeeCareerPackageDTO.getCareerPackage());
@@ -44,8 +52,13 @@ public class EmployeeCareerPackageService {
         if(employeeCareerPackage.isEmpty()){
             throw new ExistsException("Employee Career Package does not exist");
         }
+        Optional<CareerPackageTemplate> careerPackageTemplate = careerPackageTemplateRepository.findByTitle(employeeCareerPackage.get().getCareerPackageTemplate().getTitle());
+        if(careerPackageTemplate.isEmpty()){
+            throw new ExistsException("Career Package Template does not exist.");
+        }
         EmployeeCareerPackage updatedEmployeeCareerPackage = employeeCareerPackage.get();
         updatedEmployeeCareerPackage.setCareerPackage(careerPackage);
+        updatedEmployeeCareerPackage.setCareerPackageTemplate(careerPackageTemplate.get());
         employeeCareerPackageRepository.save(updatedEmployeeCareerPackage);
     }
 

@@ -22,15 +22,19 @@ public class EmployeeCareerPackage {
     private SubmittedCareerPackage submittedCareerPackage;
     private String careerPackageName;
     private Date date;
+    @ManyToOne
+    @JoinColumn( name = "career_package_template")
+    private CareerPackageTemplate careerPackageTemplate;
 
     public EmployeeCareerPackage(){}
 
-    public EmployeeCareerPackage(int employeeId, byte[] careerPackage, SubmittedCareerPackage submittedCareerPackage, String careerPackageName, Date date) {
+    public EmployeeCareerPackage(int employeeId, byte[] careerPackage, SubmittedCareerPackage submittedCareerPackage, String careerPackageName, Date date, CareerPackageTemplate careerPackageTemplate) {
         this.employeeId = employeeId;
         this.careerPackage = careerPackage;
         this.submittedCareerPackage = submittedCareerPackage;
         this.careerPackageName = careerPackageName;
         this.date = date;
+        this.careerPackageTemplate = careerPackageTemplate;
     }
 
     public int getId() {
@@ -79,5 +83,13 @@ public class EmployeeCareerPackage {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public CareerPackageTemplate getCareerPackageTemplate() {
+        return careerPackageTemplate;
+    }
+
+    public void setCareerPackageTemplate(CareerPackageTemplate careerPackageTemplate) {
+        this.careerPackageTemplate = careerPackageTemplate;
     }
 }

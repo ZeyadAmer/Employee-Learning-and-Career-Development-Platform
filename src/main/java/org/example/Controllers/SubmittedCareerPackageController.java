@@ -79,5 +79,4 @@ public class SubmittedCareerPackageController {
 
         return new ResponseEntity<>(careerPackageFile, headers, HttpStatus.OK);
     }
-
 }

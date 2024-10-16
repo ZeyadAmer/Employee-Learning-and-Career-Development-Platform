@@ -22,7 +22,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final SubmittedCareerPackageRepository submittedCareerPackageRepository;
 
-    @Autowired
     public CommentService(CommentMapper commentMapper, CommentRepository commentRepository, SubmittedCareerPackageRepository submittedCareerPackageRepository) {
         this.commentMapper = commentMapper;
         this.commentRepository = commentRepository;

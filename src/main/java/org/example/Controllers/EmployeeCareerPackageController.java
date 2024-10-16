@@ -1,5 +1,6 @@
 package org.example.Controllers;
 
+import org.example.Mappers.CareerPackageTemplateDTO;
 import org.example.Mappers.EmployeeCareerPackageDTO;
 import org.example.Services.EmployeeCareerPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class EmployeeCareerPackageController {
     private EmployeeCareerPackageService employeeCareerPackageService;
 
     @PostMapping
-    public ResponseEntity<String> createEmployeeCareerPackage(@RequestParam("employeeId") int employeeId, @RequestParam("careerPackage") MultipartFile file, @RequestParam("careerPackageName") String careerPackageName, @RequestParam("date")Date date) throws IOException {
+    public ResponseEntity<String> createEmployeeCareerPackage(@RequestParam("employeeId") int employeeId, @RequestParam("careerPackage") MultipartFile file, @RequestParam("careerPackageName") String careerPackageName, @RequestParam("date")Date date, @RequestParam("careerPackageTemplate") CareerPackageTemplateDTO careerPackageTemplateDTO) throws IOException {
         byte[] careerPackage = file.getBytes();
-        EmployeeCareerPackageDTO employeeCareerPackageDTO = new EmployeeCareerPackageDTO(employeeId, careerPackage, careerPackageName, date);
+        EmployeeCareerPackageDTO employeeCareerPackageDTO = new EmployeeCareerPackageDTO(employeeId, careerPackage, careerPackageName, date, careerPackageTemplateDTO);
         employeeCareerPackageService.createEmployeeCareerPackage(employeeCareerPackageDTO);
         String jsonResponse = String.format("{\"message\": \"%s\"}", "Employee Career Package created.");
         return ResponseEntity.ok(jsonResponse);

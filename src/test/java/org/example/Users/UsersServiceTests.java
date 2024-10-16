@@ -43,9 +43,10 @@ public class UsersServiceTests {
         MockitoAnnotations.openMocks(this);
     }
     @Test
-    public void GetUser_Succes(){
+    public void GetUser_Success(){
         User user = new User();
         UserDTO userDto1 = new UserDTO();
+        userDto1.setEmail("email@email.com");
         Mockito.when(userRepository.findById(1)).thenReturn(Optional.of(user));
         Mockito.when(userMapper.userToUserDTO(user)).thenReturn(userDto1);
         UserDTO userDTO = userService.getUser(1);

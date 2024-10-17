@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
     <groupId>task3</groupId>
     <artifactId>sumergePlatform</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -14,6 +15,8 @@
         <version>2.7.5</version> <!-- Replace with the desired Spring Boot version -->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -102,4 +105,20 @@
         </dependency>
 
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M9</version>
+                <configuration>
+                    <parallel>none</parallel> <!-- Disable parallel execution -->
+                    <includes>
+                        <include>**/*Test.java</include> <!-- Ensure tests are discovered -->
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

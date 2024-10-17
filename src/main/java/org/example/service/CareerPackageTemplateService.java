@@ -47,6 +47,7 @@ public class CareerPackageTemplateService {
         careerPackageTemplateRepository.save(updatedCareerPackageTemplate);
     }
 
+    @Transactional
     public CareerPackageTemplateDTO getCareerPackageTemplate(String title){
         Optional<CareerPackageTemplate> careerPackageTemplate = careerPackageTemplateRepository.findByTitle(title);
         if(careerPackageTemplate.isEmpty()){

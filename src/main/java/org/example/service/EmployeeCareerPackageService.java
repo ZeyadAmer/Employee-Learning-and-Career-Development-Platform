@@ -26,6 +26,7 @@ public class EmployeeCareerPackageService {
         this.careerPackageTemplateRepository = careerPackageTemplateRepository;
     }
 
+    @Transactional
     public void createEmployeeCareerPackage(EmployeeCareerPackageDTO employeeCareerPackageDTO){
         if(employeeCareerPackageRepository.findById(employeeCareerPackageDTO.getId()).isPresent()){
             throw new ExistsException("Employee Career Package already exists");
@@ -34,9 +35,9 @@ public class EmployeeCareerPackageService {
         if(careerPackageTemplate.isEmpty()){
             throw new ExistsException("Career Package Template does not exist.");
         }
-        System.out.println("employee id: "+ employeeCareerPackageDTO.getEmployeeId());
-        System.out.println("career package: "+employeeCareerPackageDTO.getCareerPackage());
-        employeeCareerPackageRepository.save(employeeCareerPackageMapper.employeeCareerPackageDTOToEmployeeCareerPackage(employeeCareerPackageDTO));
+        EmployeeCareerPackage employeeCareerPackage = employeeCareerPackageMapper.employeeCareerPackageDTOToEmployeeCareerPackage(employeeCareerPackageDTO);
+        employeeCareerPackage.setCareerPackageTemplate(careerPackageTemplate.get());
+        employeeCareerPackageRepository.save(employeeCareerPackage);
     }
 
     public void deleteEmployeeCareerPackage(int id){

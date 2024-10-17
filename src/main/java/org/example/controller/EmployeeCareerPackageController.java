@@ -21,9 +21,11 @@ public class EmployeeCareerPackageController {
     private EmployeeCareerPackageService employeeCareerPackageService;
 
     @PostMapping
-    public ResponseEntity<String> createEmployeeCareerPackage(@RequestParam("employeeId") int employeeId, @RequestParam("careerPackage") MultipartFile file, @RequestParam("careerPackageName") String careerPackageName, @RequestParam("date")Date date, @RequestParam("careerPackageTemplate") CareerPackageTemplateDTO careerPackageTemplateDTO) throws IOException {
+        public ResponseEntity<String> createEmployeeCareerPackage(@RequestParam("employeeId") int employeeId, @RequestParam("careerPackage") MultipartFile file, @RequestParam("careerPackageName") String careerPackageName, @RequestParam("date")Date date, @RequestParam("careerPackageTemplate") String careerPackageTemplateDTO) throws IOException {
         byte[] careerPackage = file.getBytes();
-        EmployeeCareerPackageDTO employeeCareerPackageDTO = new EmployeeCareerPackageDTO(employeeId, careerPackage, careerPackageName, date, careerPackageTemplateDTO);
+        CareerPackageTemplateDTO careerPackageTemplateDTO1 = new CareerPackageTemplateDTO();
+        careerPackageTemplateDTO1.setTitle(careerPackageTemplateDTO);
+        EmployeeCareerPackageDTO employeeCareerPackageDTO = new EmployeeCareerPackageDTO(employeeId, careerPackage, careerPackageName, date, careerPackageTemplateDTO1);
         employeeCareerPackageService.createEmployeeCareerPackage(employeeCareerPackageDTO);
         String jsonResponse = String.format("{\"message\": \"%s\"}", "Employee Career Package created.");
         return ResponseEntity.ok(jsonResponse);

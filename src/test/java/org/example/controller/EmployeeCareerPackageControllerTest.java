@@ -41,7 +41,7 @@ public class EmployeeCareerPackageControllerTest {
                 .createEmployeeCareerPackage(Mockito.any(EmployeeCareerPackageDTO.class));
 
         ResponseEntity<String> response = employeeCareerPackageController.createEmployeeCareerPackage(
-                1, mockFile, "Career Package", date, templateDTO);
+                1, mockFile, "Career Package", date, "");
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("{\"message\": \"Employee Career Package created.\"}", response.getBody());
